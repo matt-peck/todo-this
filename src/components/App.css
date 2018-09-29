@@ -1,0 +1,15 @@
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #fafafa;
+  text-align: center;
+}
+
+.main-wrapper {
+  height: 100%;
+  width: 70%;
+  margin: 0 auto;
+}
