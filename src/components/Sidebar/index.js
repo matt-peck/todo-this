@@ -15,12 +15,12 @@ const Sidebar = ({ Projects }) => {
       <Link className="nav-link" to="/week">
         @ Next 7 Days
       </Link>
-      <Link className="nav-link" to="/">
+      <Link className="nav-link" to="/projects">
         @ Projects
       </Link>
       {Projects.map(p => {
         return (
-          <Link key={p} className="nav-link project" to={`/project/${p}`}>
+          <Link key={p} className="nav-link projects" to={`/projects/${p}`}>
             {p}
           </Link>
         );
