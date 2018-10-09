@@ -1,10 +1,8 @@
 import React, { Component, Fragment } from "react";
 import Topbar from "./Topbar";
 import Sidebar from "./Sidebar";
-import Main from "./Main";
-
-// import logo from './logo.svg';
-import "./App.css";
+import TodoLists from "./TodoLists";
+import "../css/App.css";
 
 class App extends Component {
   render() {
@@ -13,7 +11,7 @@ class App extends Component {
         <Topbar />
         <div className="main-wrapper">
           <Sidebar />
-          <Main />
+          <TodoLists />
         </div>
       </Fragment>
     );

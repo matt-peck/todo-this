@@ -1,0 +1,120 @@
+.main {
+  float: left;
+  width: 670px;
+  height: auto;
+  /* padding: 15px; */
+  background-color: white;
+  border-right: 1px solid #f1f1f1;
+  text-align: left;
+}
+
+.view-header {
+  font-size: 20px;
+  font-weight: 300;
+  margin: 10px;
+  margin-top: 15px;
+}
+
+.todo-list-header {
+  font-size: 14px;
+  font-weight: bold;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 20px 10px;
+}
+
+.todo-list-header.overdue {
+  color: red;
+}
+
+.todo-list-header .date {
+  margin-left: 8px;
+  color: lightgray;
+  font-size: 11px;
+}
+
+.todo {
+  border-bottom: 1px solid #f0f0f0;
+  height: 18px;
+  line-height: 18px;
+  padding: 15px;
+}
+
+.todo .title {
+  font-size: 14px;
+}
+
+.todo .complete-btn {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 15px;
+  border: 1px solid darkGray;
+  border-radius: 100%;
+}
+
+.todo .complete-btn:hover {
+  background-color: lightgray;
+  cursor: pointer;
+}
+
+.todo .project {
+  font-size: 10px;
+  color: steelblue;
+  float: right;
+}
+
+.add-todo .btn {
+  /* border: 1px solid black; */
+  border-radius: 3px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  padding: 7px 10px;
+}
+
+.add-todo .cancel:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.add-todo .input {
+  height: 30px;
+  border: none;
+  border: 2px solid #f0f0f0;
+  /* display: block; */
+  width: 95%;
+  margin-left: 10px;
+  font-size: 14px;
+  padding: 3px;
+  padding-left: 10px;
+}
+
+.add-todo .input input:first-child {
+  border: none;
+  height: 30px;
+  outline: none;
+  font-size: 14px;
+  padding-left: 10px;
+  width: 70%;
+}
+
+.add-todo .input input:last-child {
+  border: none;
+  border-left: 1px solid gray;
+  height: 30px;
+  outline: none;
+  float: right;
+  width: 150px;
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+.add-todo input:focus {
+  outline: none;
+}
+
+.todo-form-projects-button {
+  font-size: 12px;
+  float: right;
+  width: 150px;
+}

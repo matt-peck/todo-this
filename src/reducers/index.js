@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import Todos from "./Todos";
 
 // const initialState = {
 //   user: {
@@ -17,67 +18,6 @@ import { combineReducers } from "redux";
 //   ]
 // };
 
-const _todos = [
-  {
-    title: "Pay Bills - 1",
-    completed: false,
-    dueDate: "2018-10-01",
-    project: "Finances"
-  },
-  {
-    title: "Pay Bills - 2",
-    completed: false,
-    dueDate: "2018-10-01",
-    project: "Finances"
-  },
-  {
-    title: "Pay Bills - 3",
-    completed: false,
-    dueDate: "2018-10-01",
-    project: "Finances"
-  },
-  {
-    title: "Attend HOA Meeting - 1",
-    completed: false,
-    dueDate: "2018-09-29",
-    project: "Admin"
-  },
-  {
-    title: "Attend HOA Meeting - 2",
-    completed: false,
-    dueDate: "2018-09-29",
-    project: "Admin"
-  },
-  {
-    title: "Attend HOA Meeting - 3",
-    completed: false,
-    dueDate: "2018-09-29",
-    project: "Admin"
-  },
-  {
-    title: "Dental Exam",
-    completed: false,
-    dueDate: "2018-09-28",
-    project: "Guard"
-  },
-  {
-    title: "Submit Timesheet",
-    completed: false,
-    dueDate: "2018-09-29",
-    project: "Google"
-  },
-  {
-    title: "Attend Training",
-    completed: false,
-    dueDate: "2018-9-30",
-    project: null
-  }
-];
-
-const todos = (state = _todos, action) => {
-  return state;
-};
-
 // const mainReducer = (state = initialState, action) => {
 //   switch (action.type) {
 //     default:
@@ -85,4 +25,4 @@ const todos = (state = _todos, action) => {
 //   }
 // };
 
-export default combineReducers({ todos });
+export default combineReducers({ Todos });

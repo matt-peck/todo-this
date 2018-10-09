@@ -5,4 +5,10 @@
   background-color: #fafafa;
   border-right: 1px solid #f1f1f1;
   float: left;
+  text-align: left;
+}
+
+.sidebar > div {
+  margin: 15px;
+  /* border: 1px solid blue; */
 }
