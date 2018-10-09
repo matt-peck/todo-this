@@ -1,61 +1,39 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import "../../css/Sidebar.css";
 
-export default () => {
+const Sidebar = ({ Projects }) => {
   return (
     <div className="sidebar">
-      <Link
-        style={{
-          color: "black",
-          textDecoration: "none",
-          display: "block",
-          marginBottom: "10px"
-        }}
-        to="/inbox"
-      >
-        <span>@ </span>
-        Inbox
+      <Link className="nav-link" to="/inbox">
+        @ Inbox
       </Link>
-      <Link
-        style={{
-          color: "black",
-          textDecoration: "none",
-          display: "block",
-          marginBottom: "10px"
-        }}
-        to="/today"
-      >
-        <span>@ </span>
-        Today
+      <Link className="nav-link" to="/today">
+        @ Today
       </Link>
-      <Link
-        style={{
-          color: "black",
-          textDecoration: "none",
-          display: "block",
-          marginBottom: "10px"
-        }}
-        to="/week"
-      >
-        <span>@ </span>
-        Next 7 Days
+      <Link className="nav-link" to="/week">
+        @ Next 7 Days
       </Link>
-      {/* <div>
-        <span>@ </span>
-        Projects
-        <span
-          style={{
-            // border: "1px solid black",
-            float: "right",
-            lineHeight: "17px",
-            marginRight: "20px",
-            fontSize: "22px"
-          }}
-        >
-          +
-        </span>
-      </div> */}
+      <Link className="nav-link" to="/">
+        @ Projects
+      </Link>
+      {Projects.map(p => {
+        return (
+          <Link key={p} className="nav-link project" to={`/project/${p}`}>
+            {p}
+          </Link>
+        );
+      })}
     </div>
   );
 };
+const mapState = state => {
+  const Projects = state.Projects.reduce((list, p) => {
+    return [...list, p.name, ...p.subProjects.map(s => s.name)];
+  }, []);
+  return {
+    Projects
+  };
+};
+export default connect(mapState)(Sidebar);

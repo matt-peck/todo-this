@@ -12,3 +12,14 @@
   margin: 15px;
   /* border: 1px solid blue; */
 }
+
+.sidebar .nav-link {
+  color: black;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.sidebar .nav-link.project {
+  margin-left: 10px;
+}

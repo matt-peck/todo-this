@@ -138,6 +138,7 @@ class AddTodo extends Component {
   };
 
   render() {
+    const { project } = this.props;
     const { view } = this.state;
 
     switch (view) {
@@ -146,7 +147,11 @@ class AddTodo extends Component {
 
       case "FORM_VIEW":
         return (
-          <AddTodoForm addTodo={this.addTodo} toggleView={this.toggleView} />
+          <AddTodoForm
+            addTodo={this.addTodo}
+            toggleView={this.toggleView}
+            project={project}
+          />
         );
 
       default:
