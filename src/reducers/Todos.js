@@ -90,10 +90,18 @@ const todos = (state = _todos, action) => {
     case Types.TODO_UPDATE:
       return state.map(t => {
         if (t.id === action.id) {
-          return { ...t, title: action.title, dueDate: action.dueDate };
+          return {
+            ...t,
+            title: action.title,
+            dueDate: action.dueDate,
+            project: action.project
+          };
         }
         return t;
       });
+
+    case Types.TODO_DELETE:
+      return state.filter(t => t.id !== action.id);
 
     default:
       return state;

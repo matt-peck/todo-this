@@ -13,8 +13,14 @@ export const addTodo = title => {
   };
 };
 
-export const updateTodo = (id, title, dueDate) => {
+export const updateTodo = (id, title, dueDate, project) => {
   return async dispatch => {
-    dispatch({ type: Types.TODO_UPDATE, id, title, dueDate });
+    dispatch({ type: Types.TODO_UPDATE, id, title, dueDate, project });
+  };
+};
+
+export const deleteTodo = id => {
+  return async dispatch => {
+    dispatch({ type: Types.TODO_DELETE, id });
   };
 };

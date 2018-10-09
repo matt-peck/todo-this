@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 const AddTodoButton = ({ toggleView }) => {
   return (
@@ -29,10 +30,11 @@ const AddTodoButton = ({ toggleView }) => {
   );
 };
 
-export class AddTodoForm extends Component {
+class AddTodoFormShell extends Component {
   state = {
     title: this.props.title || "",
-    dueDate: this.props.dueDate || ""
+    dueDate: this.props.dueDate || "",
+    project: this.props.project || ""
   };
 
   addTodo = () => {
@@ -41,7 +43,11 @@ export class AddTodoForm extends Component {
   };
 
   updateTodo = () => {
-    this.props.updateTodo(this.state.title, this.state.dueDate);
+    this.props.updateTodo(
+      this.state.title,
+      this.state.dueDate,
+      this.state.project
+    );
   };
 
   handleSubmit = () => {
@@ -53,14 +59,6 @@ export class AddTodoForm extends Component {
   };
 
   clearTitle = () => this.setState({ title: "" });
-
-  componentWillMount = () => {
-    console.log("componentWillMount", this.props.dueDate);
-  };
-
-  componentDidMount = () => {
-    console.log("componentDidMount", this.props.dueDate);
-  };
 
   render() {
     const { toggleView, view } = this.props;
@@ -90,12 +88,33 @@ export class AddTodoForm extends Component {
           <span onClick={toggleView} className="cancel">
             Cancel
           </span>
-          <span className="todo-form-projects-button">--PROJECTS--</span>
+          <select
+            className="todo-form-projects-button"
+            value={this.state.project}
+            onChange={e => this.setState({ project: e.target.value })}
+          >
+            <option>---</option>
+            {this.props.Projects.map(p => (
+              <option key={p} value={p}>
+                {p}
+              </option>
+            ))}
+          </select>
         </div>
       </div>
     );
   }
 }
+
+const mapFormState = state => {
+  const Projects = state.Projects.reduce((list, p) => {
+    return [...list, p.name, ...p.subProjects.map(s => s.name)];
+  }, []);
+  return {
+    Projects
+  };
+};
+export const AddTodoForm = connect(mapFormState)(AddTodoFormShell);
 
 class AddTodo extends Component {
   state = {

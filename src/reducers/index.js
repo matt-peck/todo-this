@@ -6,16 +6,6 @@ import Todos from "./Todos";
 //     lastName: "Peck",
 //     firstName: "Matthew"
 //   },
-//   projects: [
-//     {
-//       name: "Work",
-//       subProjects: [{ name: "Guard" }, { name: "Google" }]
-//     },
-//     {
-//       name: "Personal",
-//       subProjects: [{ name: "Admin" }, { name: "Finances" }]
-//     }
-//   ]
 // };
 
 // const mainReducer = (state = initialState, action) => {
@@ -25,4 +15,22 @@ import Todos from "./Todos";
 //   }
 // };
 
-export default combineReducers({ Todos });
+const _projects = [
+  {
+    name: "Work",
+    subProjects: [{ name: "Guard" }, { name: "Google" }]
+  },
+  {
+    name: "Personal",
+    subProjects: [{ name: "Admin" }, { name: "Finances" }]
+  }
+];
+
+const Projects = (state = _projects, action) => {
+  switch (action.type) {
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ Todos, Projects });
