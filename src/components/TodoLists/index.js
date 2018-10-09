@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { addTodo } from "../../actions/Todos";
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, matchPath } from "react-router-dom";
 import TodayView from "./TodayView";
 import WeekView from "./WeekView";
 import InboxView from "./InboxView";
@@ -22,11 +22,11 @@ const TodoLists = ({ Todos, addTodo }) => {
         path="/project/:projectName"
         render={props => {
           const { projectName } = props.match.params;
-          const filteredTodos = Todos.filter(t => t.project === projectName);
+
           return (
             <Fragment>
               <header className="todo-list-header">{projectName}</header>
-              {filteredTodos.map(todo => (
+              {Todos.map(todo => (
                 <Todo key={todo.title} todo={todo} />
               ))}
               <AddTodo addTodo={addTodo} project={projectName} />
@@ -39,7 +39,15 @@ const TodoLists = ({ Todos, addTodo }) => {
 };
 
 const mapState = (state, ownProps) => {
-  const Todos = state.Todos.filter(t => !t.completed);
+  const { projectName } = matchPath(ownProps.location.pathname, {
+    path: "/project/:projectName",
+    exact: true,
+    strict: false
+  }).params;
+  const Todos = state.Todos.filter(t => !t.completed).filter(
+    t => t.project === projectName
+  );
+
   return {
     Todos
   };
