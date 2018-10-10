@@ -83,7 +83,7 @@ const todos = (state = _todos, action) => {
           id: state.length,
           title: action.title,
           dueDate: action.dueDate,
-          project: null
+          project: action.project || null
         }
       ];
 

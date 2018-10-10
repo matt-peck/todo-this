@@ -38,7 +38,11 @@ class AddTodoFormShell extends Component {
   };
 
   addTodo = () => {
-    this.props.addTodo(this.state.title);
+    this.props.addTodo(
+      this.state.title,
+      this.state.dueDate,
+      this.state.project
+    );
     this.clearTitle();
   };
 
@@ -121,8 +125,8 @@ class AddTodo extends Component {
     view: "BUTTON_VIEW"
   };
 
-  addTodo = title => {
-    this.props.addTodo(title);
+  addTodo = (title, dueDate, project) => {
+    this.props.addTodo(title, dueDate, project);
     this.toggleView();
   };
 
@@ -138,7 +142,7 @@ class AddTodo extends Component {
   };
 
   render() {
-    const { project } = this.props;
+    const { project, dueDate } = this.props;
     const { view } = this.state;
 
     switch (view) {
@@ -151,6 +155,7 @@ class AddTodo extends Component {
             addTodo={this.addTodo}
             toggleView={this.toggleView}
             project={project}
+            dueDate={dueDate}
           />
         );
 

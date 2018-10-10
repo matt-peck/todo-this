@@ -40,7 +40,12 @@ class TodoList extends Component {
         {todos.map(todo => (
           <Todo key={todo.title} todo={todo} />
         ))}
-        <AddTodo addTodo={this.props.addTodo} />
+        {(title !== "Overdue" && (
+          <AddTodo
+            addTodo={this.props.addTodo}
+            dueDate={moment(date).format("YYYY-MM-DD")}
+          />
+        )) || <div style={{ marginBottom: "25px" }} />}
       </Fragment>
     );
   }
@@ -62,7 +67,8 @@ const mapState = (state, ownProps) => {
 
 const mapActions = dispatch => {
   return {
-    addTodo: title => dispatch(addTodo(title))
+    addTodo: (title, dueDate, project) =>
+      dispatch(addTodo(title, dueDate, project))
   };
 };
 
