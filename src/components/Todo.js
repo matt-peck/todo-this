@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { completeTodo, updateTodo, deleteTodo } from "../../actions/Todos";
-import { AddTodoForm } from "./AddTodo";
+import { completeTodo, updateTodo, deleteTodo } from "../actions/Todos";
+import TodoForm from "./TodoForm";
+import "../css/Todo.css";
 
 class Todo extends Component {
   state = {
@@ -31,7 +32,7 @@ class Todo extends Component {
     switch (view) {
       case "EDIT":
         return (
-          <AddTodoForm
+          <TodoForm
             view="UPDATE"
             title={todo.title}
             dueDate={todo.dueDate}

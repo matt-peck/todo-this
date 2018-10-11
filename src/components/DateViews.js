@@ -1,9 +1,17 @@
 import React, { Fragment } from "react";
-import { connect } from "react-redux";
 import TodoList from "./TodoList";
 import * as moment from "moment";
 
-const WeekView = () => {
+export const TodayView = () => {
+  return (
+    <Fragment>
+      <header className="view-header">Today</header>
+      <TodoList date={moment()} />
+    </Fragment>
+  );
+};
+
+export const WeekView = () => {
   const days = [0, 1, 2, 3, 4, 5, 6];
 
   return (
@@ -17,16 +25,3 @@ const WeekView = () => {
     </Fragment>
   );
 };
-
-const mapState = state => {
-  return {};
-};
-
-const mapActions = () => {
-  return {};
-};
-
-export default connect(
-  mapState,
-  mapActions
-)(WeekView);

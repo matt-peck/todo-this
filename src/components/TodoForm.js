@@ -1,36 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-const AddTodoButton = ({ toggleView }) => {
-  return (
-    <div
-      onClick={toggleView}
-      style={{ marginLeft: "20px", marginBottom: "25px" }}
-    >
-      <span
-        style={{
-          fontSize: "28px",
-          marginRight: "10px",
-          color: "#808080",
-          fontWeight: "100"
-        }}
-      >
-        +
-      </span>
-      <span
-        style={{
-          fontSize: "16px",
-          fontWeight: "normal",
-          color: "#808080"
-        }}
-      >
-        Add Task
-      </span>
-    </div>
-  );
-};
-
-class AddTodoFormShell extends Component {
+class TodoForm extends Component {
   state = {
     title: this.props.title || "",
     dueDate: this.props.dueDate || "",
@@ -114,55 +85,10 @@ const mapFormState = state => {
   const Projects = state.Projects.reduce((list, p) => {
     return [...list, p.name, ...p.subProjects.map(s => s.name)];
   }, []);
+
   return {
     Projects
   };
 };
-export const AddTodoForm = connect(mapFormState)(AddTodoFormShell);
 
-class AddTodo extends Component {
-  state = {
-    view: "BUTTON_VIEW"
-  };
-
-  addTodo = (title, dueDate, project) => {
-    this.props.addTodo(title, dueDate, project);
-    this.toggleView();
-  };
-
-  toggleView = () => {
-    switch (this.state.view) {
-      case "BUTTON_VIEW":
-        this.setState({ view: "FORM_VIEW" });
-        return;
-      default:
-        this.setState({ view: "BUTTON_VIEW" });
-        return;
-    }
-  };
-
-  render() {
-    const { project, dueDate } = this.props;
-    const { view } = this.state;
-
-    switch (view) {
-      case "BUTTON_VIEW":
-        return <AddTodoButton toggleView={this.toggleView} />;
-
-      case "FORM_VIEW":
-        return (
-          <AddTodoForm
-            addTodo={this.addTodo}
-            toggleView={this.toggleView}
-            project={project}
-            dueDate={dueDate}
-          />
-        );
-
-      default:
-        return;
-    }
-  }
-}
-
-export default AddTodo;
+export default connect(mapFormState)(TodoForm);

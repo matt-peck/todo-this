@@ -61,7 +61,7 @@ const _todos = [
     id: 8,
     title: "Attend Training",
     completed: false,
-    dueDate: "2018-9-30",
+    dueDate: "2018-09-30",
     project: null
   }
 ];

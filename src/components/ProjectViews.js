@@ -1,17 +1,32 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { addTodo } from "../../actions/Todos";
-import { Route, withRouter } from "react-router-dom";
-import TodayView from "./TodayView";
-import WeekView from "./WeekView";
-import InboxView from "./InboxView";
 import Todo from "./Todo";
-import AddTodo from "./AddTodo";
-import "../../css/TodoLists.css";
+import AddTodoContainer from "./AddTodoContainer";
 
 // Check out: https://gist.github.com/zvweiss/66517767889a7ed9895a
 // add viewFilter
-const ProjectTodoListShell = ({ projectName, Todos, Projects }) => {
+
+const InboxViewShell = ({ Todos }) => {
+  return (
+    <Fragment>
+      <header className="view-header">Inbox</header>
+      {Todos.map(todo => (
+        <Todo key={todo.title} todo={todo} />
+      ))}
+      <AddTodoContainer />
+    </Fragment>
+  );
+};
+
+const mapInboxState = state => {
+  return {
+    Todos: state.Todos.filter(t => !t.project)
+  };
+};
+
+export const InboxView = connect(mapInboxState)(InboxViewShell);
+
+const ProjectViewShell = ({ projectName, Todos, Projects }) => {
   switch (projectName) {
     case "Projects":
       return (
@@ -24,7 +39,7 @@ const ProjectTodoListShell = ({ projectName, Todos, Projects }) => {
                 {Todos.map(todo => (
                   <Todo key={todo.title} todo={todo} />
                 ))}
-                <AddTodo addTodo={addTodo} project={p} />
+                <AddTodoContainer project={p} />
               </Fragment>
             );
           })}
@@ -38,12 +53,13 @@ const ProjectTodoListShell = ({ projectName, Todos, Projects }) => {
           {Todos.map(todo => (
             <Todo key={todo.title} todo={todo} />
           ))}
-          <AddTodo addTodo={addTodo} project={projectName} />
+          <AddTodoContainer project={projectName} />
         </Fragment>
       );
   }
 };
-const mapProjectTodoState = (state, ownProps) => {
+
+const mapProjectsState = (state, ownProps) => {
   const { params } = ownProps.match;
 
   const Todos = params.projectName
@@ -62,18 +78,5 @@ const mapProjectTodoState = (state, ownProps) => {
     Projects
   };
 };
-const ProjectTodoList = connect(mapProjectTodoState)(ProjectTodoListShell);
 
-const TodoLists = () => {
-  return (
-    <div className="main">
-      <Route path="/inbox" component={InboxView} />
-      <Route path="/today" component={TodayView} />
-      <Route path="/week" component={WeekView} />
-      <Route exact path="/projects" component={ProjectTodoList} />
-      <Route path="/projects/:projectName" component={ProjectTodoList} />
-    </div>
-  );
-};
-
-export default withRouter(TodoLists);
+export const ProjectView = connect(mapProjectsState)(ProjectViewShell);
