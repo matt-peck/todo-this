@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { completeTodo, updateTodo, deleteTodo } from "../actions/Todos";
 import TodoForm from "./TodoForm";
-import "../css/Todo.css";
+import "../css/TodoContainer.css";
 
-class Todo extends Component {
+class TodoContainer extends Component {
   state = {
     view: "READ"
   };
@@ -44,28 +44,28 @@ class Todo extends Component {
         );
       default:
         return (
-          <div className="todo">
-            <div className="complete-btn-container">
+          <div className="todo-read-container">
+            <div className="todo-complete-btn-container">
               <div
                 onClick={() => completeTodo(todo.id)}
-                className="complete-btn"
+                className="todo-complete-btn"
               />
             </div>
 
-            <div onClick={this.toggleView} className="title">
+            <div onClick={this.toggleView} className="todo-title">
               {todo.title}
             </div>
             <Link
               to={(todo.project && `/projects/${todo.project}`) || `/inbox`}
-              className="project"
+              className="todo-assigned-project"
             >
               {(todo.project && todo.project) || "Inbox"}
             </Link>
             <div
-              className="delete-container"
+              className="todo-delete-container"
               onClick={() => deleteTodo(todo.id)}
             >
-              <div className="delete">X</div>
+              <div className="todo-delete-btn">X</div>
             </div>
           </div>
         );
@@ -87,4 +87,4 @@ const mapActions = dispatch => {
 export default connect(
   mapState,
   mapActions
-)(Todo);
+)(TodoContainer);

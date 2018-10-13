@@ -1,4 +1,4 @@
-.todo {
+.todo-read-container {
   display: grid;
   grid-gap: 0px;
   grid-template-columns: 35px 1fr 60px 30px;
@@ -7,30 +7,28 @@
   align-items: center;
 }
 
-.todo .complete-btn-container {
+.todo-read-container .todo-complete-btn-container {
   height: 100%;
   grid-area: complete;
   padding: 12px 9px;
-  /* align-content: center;
-  line-height: 43px; */
   border-bottom: 1px solid rgb(240, 240, 240);
 }
 
-.todo .complete-btn {
+.todo-read-container .todo-complete-btn-container .todo-complete-btn {
   width: 18px;
   height: 18px;
   margin-right: 15px;
   line-height: 43px;
-  border: 2px solid darkGray;
+  border: 1px solid darkGray;
   border-radius: 100%;
 }
 
-.todo .complete-btn:hover {
+.todo-read-container .todo-complete-btn-container .todo-complete-btn:hover {
   background-color: lightgray;
   cursor: pointer;
 }
 
-.todo .title {
+.todo-read-container .todo-title {
   grid-area: title;
   align-content: center;
   padding-left: 8px;
@@ -39,7 +37,7 @@
   border-bottom: 1px solid rgb(240, 240, 240);
 }
 
-.todo .project {
+.todo-read-container .todo-assigned-project {
   grid-area: metadata;
   align-content: center;
   line-height: 43px;
@@ -51,22 +49,24 @@
   text-decoration: none;
 }
 
-.todo .project:hover {
+.todo-read-container .todo-assigned-project:hover {
   text-decoration: underline;
 }
 
-.todo .delete-container {
+.todo-read-container .todo-delete-container {
   display: none;
   grid-area: menu;
   align-content: center;
   cursor: pointer;
 }
 
-.todo:hover .delete-container {
+.todo-read-container:hover .todo-delete-container {
   display: block;
 }
 
-.todo .delete {
-  font-size: 14px;
+.todo-read-container .todo-delete-container .todo-delete-btn {
+  font-size: 12px;
+  color: #333;
+  font-weight: 600;
   text-align: center;
 }

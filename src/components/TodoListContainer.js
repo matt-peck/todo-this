@@ -1,10 +1,11 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import * as moment from "moment";
-import Todo from "./Todo";
+import TodoContainer from "./TodoContainer";
 import AddTodoContainer from "./AddTodoContainer";
+import "../css/TodoListContainer.css";
 
-const TodoList = ({ date, todos, addTodo }) => {
+const TodoListContainer = ({ date, todos }) => {
   const title = date
     ? moment(date).calendar(null, {
         sameDay: "[Today]",
@@ -24,19 +25,21 @@ const TodoList = ({ date, todos, addTodo }) => {
         : "";
 
   return (
-    <div className="todo-list">
-      <header
-        className={`todo-list-header ${title === "Overdue" && "overdue"}`}
-      >
-        {title}
-        <span className="date">{titleDate}</span>
+    <div className="todo-list-container">
+      <header className="todo-list-header">
+        <div className={`todo-list-title ${title === "Overdue" && "overdue"}`}>
+          {title}
+        </div>
+        <div className="todo-list-date">{titleDate}</div>
       </header>
-      {todos.map(todo => (
-        <Todo key={todo.title} todo={todo} />
-      ))}
+      <div className="todo-list-content">
+        {todos.map(todo => (
+          <TodoContainer key={todo.title} todo={todo} />
+        ))}
+      </div>
       {(title !== "Overdue" && (
         <AddTodoContainer dueDate={moment(date).format("YYYY-MM-DD")} />
-      )) || <div style={{ marginBottom: "25px" }} />}
+      )) || <div className="todo-list-add-todo-placeholder" />}
     </div>
   );
 };
@@ -55,4 +58,4 @@ const mapState = (state, ownProps) => {
   };
 };
 
-export default connect(mapState)(TodoList);
+export default connect(mapState)(TodoListContainer);

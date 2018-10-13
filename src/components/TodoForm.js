@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import "../css/TodoForm.css";
 
 class TodoForm extends Component {
   state = {
@@ -38,8 +39,8 @@ class TodoForm extends Component {
   render() {
     const { toggleView, view } = this.props;
     return (
-      <div className="add-todo" style={{ marginTop: "5px" }}>
-        <div className="input">
+      <div className="todo-form-container">
+        <div className="todo-form-input">
           <input
             type="text"
             autoFocus
@@ -52,17 +53,13 @@ class TodoForm extends Component {
             onChange={e => this.setState({ dueDate: e.target.value })}
           />
         </div>
-        <div style={{ paddingLeft: "20px", marginTop: "10px" }}>
-          <span
-            onClick={this.handleSubmit}
-            className="btn"
-            style={{ marginRight: "10px" }}
-          >
+        <div className="todo-form-actions">
+          <div onClick={this.handleSubmit} className="todo-form-save">
             {(view && view === "UPDATE" && "Save") || "Add Task"}
-          </span>
-          <span onClick={toggleView} className="cancel">
+          </div>
+          <div onClick={toggleView} className="todo-form-cancel">
             Cancel
-          </span>
+          </div>
           <select
             className="todo-form-projects-button"
             value={this.state.project}

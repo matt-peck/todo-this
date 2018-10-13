@@ -1,17 +1,17 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import Todo from "./Todo";
+import TodoContainer from "./TodoContainer";
 import AddTodoContainer from "./AddTodoContainer";
 
 // Check out: https://gist.github.com/zvweiss/66517767889a7ed9895a
 // add viewFilter
 
-const InboxViewShell = ({ Todos }) => {
+const InboxViewShell = ({ todos }) => {
   return (
     <Fragment>
-      <header className="view-header inbox">Inbox</header>
-      {Todos.map(todo => (
-        <Todo key={todo.title} todo={todo} />
+      <header className="view-header">Inbox</header>
+      {todos.map(todo => (
+        <TodoContainer key={todo.title} todo={todo} />
       ))}
       <AddTodoContainer />
     </Fragment>
@@ -20,24 +20,24 @@ const InboxViewShell = ({ Todos }) => {
 
 const mapInboxState = state => {
   return {
-    Todos: state.Todos.filter(t => !t.project)
+    todos: state.Todos.filter(t => !t.project)
   };
 };
 
 export const InboxView = connect(mapInboxState)(InboxViewShell);
 
-const ProjectViewShell = ({ projectName, Todos, Projects }) => {
+const ProjectViewShell = ({ projectName, todos, projects }) => {
   switch (projectName) {
     case "Projects":
       return (
         <Fragment>
           <header className="view-header">{projectName}</header>
-          {Projects.map(p => {
+          {projects.map(p => {
             return (
               <Fragment key={p}>
                 <header className="todo-list-header">{p}</header>
-                {Todos.map(todo => (
-                  <Todo key={todo.title} todo={todo} />
+                {todos.map(todo => (
+                  <TodoContainer key={todo.title} todo={todo} />
                 ))}
                 <AddTodoContainer project={p} />
               </Fragment>
@@ -50,8 +50,8 @@ const ProjectViewShell = ({ projectName, Todos, Projects }) => {
       return (
         <Fragment>
           <header className="todo-list-header">{projectName}</header>
-          {Todos.map(todo => (
-            <Todo key={todo.title} todo={todo} />
+          {todos.map(todo => (
+            <TodoContainer key={todo.title} todo={todo} />
           ))}
           <AddTodoContainer project={projectName} />
         </Fragment>
@@ -62,20 +62,20 @@ const ProjectViewShell = ({ projectName, Todos, Projects }) => {
 const mapProjectsState = (state, ownProps) => {
   const { params } = ownProps.match;
 
-  const Todos = params.projectName
+  const todos = params.projectName
     ? state.Todos.filter(
         t => !t.completed && t.project === ownProps.match.params.projectName
       )
     : state.Todos.filter(t => !t.completed && t.project);
 
-  const Projects = state.Projects.reduce((list, p) => {
+  const projects = state.Projects.reduce((list, p) => {
     return [...list, p.name, ...p.subProjects.map(s => s.name)];
   }, []);
 
   return {
-    Todos,
+    todos,
     projectName: ownProps.match.params.projectName || "Projects",
-    Projects
+    projects
   };
 };
 

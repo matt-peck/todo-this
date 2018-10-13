@@ -1,12 +1,12 @@
 import React, { Fragment } from "react";
-import TodoList from "./TodoList";
+import TodoListContainer from "./TodoListContainer";
 import * as moment from "moment";
 
 export const TodayView = () => {
   return (
     <Fragment>
       <header className="view-header">Today</header>
-      <TodoList date={moment()} />
+      <TodoListContainer date={moment()} />
     </Fragment>
   );
 };
@@ -16,11 +16,10 @@ export const WeekView = () => {
 
   return (
     <Fragment>
-      <header className="view-header">Next 7 Days</header>
-      <TodoList overdue />
-
+      <header className="view-header week">Next 7 Days</header>
+      <TodoListContainer overdue />
       {days.map(d => (
-        <TodoList key={d} date={moment().add(d, "days")} />
+        <TodoListContainer key={d} date={moment().add(d, "days")} />
       ))}
     </Fragment>
   );

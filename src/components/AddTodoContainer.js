@@ -2,32 +2,13 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addTodo } from "../actions/Todos";
 import TodoForm from "./TodoForm";
+import "../css/AddTodoContainer.css";
 
 const AddTodoButton = ({ toggleView }) => {
   return (
-    <div
-      onClick={toggleView}
-      style={{ marginLeft: "20px", marginBottom: "25px" }}
-    >
-      <span
-        style={{
-          fontSize: "28px",
-          marginRight: "10px",
-          color: "#808080",
-          fontWeight: "100"
-        }}
-      >
-        +
-      </span>
-      <span
-        style={{
-          fontSize: "16px",
-          fontWeight: "normal",
-          color: "#808080"
-        }}
-      >
-        Add Task
-      </span>
+    <div onClick={toggleView} className="add-todo-button-container">
+      <div className="add-todo-button-plus">+</div>
+      <div className="add-todo-button-text">Add Task</div>
     </div>
   );
 };

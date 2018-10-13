@@ -16,7 +16,7 @@ div {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 300px 650px;
+  grid-template-columns: 280px 655px;
   grid-template-rows: 1fr;
   grid-template-areas: "sidebar viewcontainer";
   grid-gap: 0px;
