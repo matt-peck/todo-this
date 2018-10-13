@@ -94,7 +94,7 @@ const todos = (state = _todos, action) => {
             ...t,
             title: action.title,
             dueDate: action.dueDate,
-            project: action.project
+            project: action.project || null
           };
         }
         return t;

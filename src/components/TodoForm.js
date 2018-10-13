@@ -65,7 +65,7 @@ class TodoForm extends Component {
             value={this.state.project}
             onChange={e => this.setState({ project: e.target.value })}
           >
-            <option>---</option>
+            <option value="">---</option>
             {this.props.Projects.map(p => (
               <option key={p} value={p}>
                 {p}
