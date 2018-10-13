@@ -9,7 +9,7 @@ import AddTodoContainer from "./AddTodoContainer";
 const InboxViewShell = ({ Todos }) => {
   return (
     <Fragment>
-      <header className="view-header">Inbox</header>
+      <header className="view-header inbox">Inbox</header>
       {Todos.map(todo => (
         <Todo key={todo.title} todo={todo} />
       ))}

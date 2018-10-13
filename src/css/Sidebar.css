@@ -1,16 +1,14 @@
 .sidebar {
-  height: 100%;
-  width: 265px;
-  padding: 15px;
+  grid-area: sidebar;
+  padding-top: 80px;
+  padding-left: 30px;
   background-color: #fafafa;
   border-right: 1px solid #f1f1f1;
-  float: left;
   text-align: left;
 }
 
-.sidebar > div {
-  margin: 15px;
-  /* border: 1px solid blue; */
+.sidebar:hover {
+  overflow: scroll;
 }
 
 .sidebar .nav-link {
@@ -18,8 +16,4 @@
   text-decoration: none;
   display: block;
   margin-bottom: 10px;
-}
-
-.sidebar .nav-link.projects {
-  margin-left: 10px;
 }

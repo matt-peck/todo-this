@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { completeTodo, updateTodo, deleteTodo } from "../actions/Todos";
 import TodoForm from "./TodoForm";
 import "../css/Todo.css";
@@ -44,17 +45,28 @@ class Todo extends Component {
       default:
         return (
           <div className="todo">
-            <span
-              onClick={() => completeTodo(todo.id)}
-              className="complete-btn"
-            />
-            <span onClick={this.toggleView} className="title">
+            <div className="complete-btn-container">
+              <div
+                onClick={() => completeTodo(todo.id)}
+                className="complete-btn"
+              />
+            </div>
+
+            <div onClick={this.toggleView} className="title">
               {todo.title}
-            </span>
-            <span className="project">{todo.project && todo.project}</span>
-            <span className="delete" onClick={() => deleteTodo(todo.id)}>
-              X
-            </span>
+            </div>
+            <Link
+              to={(todo.project && `/projects/${todo.project}`) || `/inbox`}
+              className="project"
+            >
+              {(todo.project && todo.project) || "Inbox"}
+            </Link>
+            <div
+              className="delete-container"
+              onClick={() => deleteTodo(todo.id)}
+            >
+              <div className="delete">X</div>
+            </div>
           </div>
         );
     }

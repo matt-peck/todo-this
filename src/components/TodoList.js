@@ -24,7 +24,7 @@ const TodoList = ({ date, todos, addTodo }) => {
         : "";
 
   return (
-    <Fragment>
+    <div className="todo-list">
       <header
         className={`todo-list-header ${title === "Overdue" && "overdue"}`}
       >
@@ -37,7 +37,7 @@ const TodoList = ({ date, todos, addTodo }) => {
       {(title !== "Overdue" && (
         <AddTodoContainer dueDate={moment(date).format("YYYY-MM-DD")} />
       )) || <div style={{ marginBottom: "25px" }} />}
-    </Fragment>
+    </div>
   );
 };
 

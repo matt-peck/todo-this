@@ -1,25 +1,31 @@
 .view-container {
-  float: left;
-  width: 670px;
-  height: auto;
-  /* padding: 15px; */
+  grid-area: viewcontainer;
+  padding-top: 80px;
+  padding-left: 30px;
+  padding-right: 20px;
   background-color: white;
   border-right: 1px solid #f1f1f1;
-  text-align: left;
 }
 
 .view-header {
   font-size: 20px;
-  font-weight: 300;
-  margin: 10px;
-  margin-top: 15px;
+  margin-bottom: 30px;
+}
+
+.view-header.inbox {
+  margin-bottom: 6px;
+}
+
+.todo-list {
+  margin-top: 12px;
+  margin-bottom: 40px;
 }
 
 .todo-list-header {
   font-size: 14px;
   font-weight: bold;
   border-bottom: 1px solid #f0f0f0;
-  padding: 20px 10px;
+  padding-bottom: 7px;
 }
 
 .todo-list-header.overdue {
@@ -27,9 +33,10 @@
 }
 
 .todo-list-header .date {
-  margin-left: 8px;
-  color: lightgray;
+  margin-left: 6px;
+  color: #999;
   font-size: 11px;
+  font-weight: normal;
 }
 
 .add-todo .btn {

@@ -1,22 +1,27 @@
 .todo {
-  border-bottom: 1px solid #f0f0f0;
-  height: 18px;
-  line-height: 18px;
-  padding: 15px;
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: 35px 1fr 60px 30px;
+  grid-template-rows: 44px;
+  grid-template-areas: "complete title metadata menu";
+  align-items: center;
 }
 
-.todo .title {
-  font-size: 14px;
-  display: inline-block;
-  width: 70%;
+.todo .complete-btn-container {
+  height: 100%;
+  grid-area: complete;
+  padding: 12px 9px;
+  /* align-content: center;
+  line-height: 43px; */
+  border-bottom: 1px solid rgb(240, 240, 240);
 }
 
 .todo .complete-btn {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   margin-right: 15px;
-  border: 1px solid darkGray;
+  line-height: 43px;
+  border: 2px solid darkGray;
   border-radius: 100%;
 }
 
@@ -25,16 +30,43 @@
   cursor: pointer;
 }
 
+.todo .title {
+  grid-area: title;
+  align-content: center;
+  padding-left: 8px;
+  font-size: 14px;
+  line-height: 43px;
+  border-bottom: 1px solid rgb(240, 240, 240);
+}
+
 .todo .project {
-  display: inline-block;
-  font-size: 10px;
-  color: steelblue;
-  margin-right: 10px;
+  grid-area: metadata;
+  align-content: center;
+  line-height: 43px;
+  border-bottom: 1px solid rgb(240, 240, 240);
+  font-size: 11px;
+  font-weight: normal;
+  color: #999;
+  text-align: center;
+  text-decoration: none;
+}
+
+.todo .project:hover {
+  text-decoration: underline;
+}
+
+.todo .delete-container {
+  display: none;
+  grid-area: menu;
+  align-content: center;
+  cursor: pointer;
+}
+
+.todo:hover .delete-container {
+  display: block;
 }
 
 .todo .delete {
-  display: inline-block;
-  font-size: 16px;
+  font-size: 14px;
   text-align: center;
-  cursor: pointer;
 }

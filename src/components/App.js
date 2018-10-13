@@ -8,7 +8,7 @@ const App = () => {
   return (
     <Fragment>
       <Topbar />
-      <div className="main-wrapper">
+      <div className="grid-container">
         <Sidebar />
         <ViewContainer />
       </div>
