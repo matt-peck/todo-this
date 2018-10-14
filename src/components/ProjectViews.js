@@ -1,32 +1,76 @@
-import React, { Fragment } from "react";
+import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
+import { enableTodoEditMode, disableTodoEditMode } from "../actions/Todos";
 import TodoContainer from "./TodoContainer";
 import AddTodoContainer from "./AddTodoContainer";
+import { Modes } from "../constants";
 
 // Check out: https://gist.github.com/zvweiss/66517767889a7ed9895a
 // add viewFilter
 
-const InboxViewShell = ({ todos }) => {
-  return (
-    <Fragment>
-      <header className="view-header">Inbox</header>
-      {todos.map(todo => (
-        <TodoContainer key={todo.title} todo={todo} />
-      ))}
-      <AddTodoContainer />
-    </Fragment>
-  );
-};
+class InboxViewShell extends Component {
+  render() {
+    const {
+      todos,
+      enableTodoEditMode,
+      disableTodoEditMode,
+      addTodoId
+    } = this.props;
+
+    return (
+      <div>
+        <header className="view-header">Inbox</header>
+        {todos.map(todo => (
+          <TodoContainer
+            key={todo.title}
+            todo={todo}
+            enableEditMode={() =>
+              enableTodoEditMode({ type: "TODO", id: todo.id })
+            }
+            disableEditMode={() =>
+              disableTodoEditMode({ type: "TODO", id: todo.id })
+            }
+          />
+        ))}
+        <AddTodoContainer
+          enableEditMode={() =>
+            enableTodoEditMode({ type: "ADD_TODO", id: "Inbox" })
+          }
+          disableEditMode={() => disableTodoEditMode({ type: "ADD_TODO" })}
+          mode={addTodoId === "Inbox" ? Modes.EDIT : Modes.READ}
+        />
+      </div>
+    );
+  }
+}
 
 const mapInboxState = state => {
   return {
-    todos: state.Todos.filter(t => !t.project)
+    todos: state.Todos.filter(t => !t.project),
+    addTodoId: state.addTodoId
   };
 };
 
-export const InboxView = connect(mapInboxState)(InboxViewShell);
+const mapDispatchInbox = dispatch => {
+  return {
+    enableTodoEditMode: id => dispatch(enableTodoEditMode(id)),
+    disableTodoEditMode: id => dispatch(disableTodoEditMode(id))
+  };
+};
 
-const ProjectViewShell = ({ projectName, todos, projects }) => {
+export const InboxView = connect(
+  mapInboxState,
+  mapDispatchInbox
+)(InboxViewShell);
+
+const ProjectViewShell = ({
+  projectName,
+  todos,
+  projects,
+  addTodoId,
+  enableTodoEditMode,
+  disableTodoEditMode
+}) => {
   switch (projectName) {
     case "Projects":
       return (
@@ -34,13 +78,32 @@ const ProjectViewShell = ({ projectName, todos, projects }) => {
           <header className="view-header">{projectName}</header>
           {projects.map(p => {
             return (
-              <Fragment key={p}>
+              <div key={p} className="todo-list-container">
                 <header className="todo-list-header">{p}</header>
-                {todos.map(todo => (
-                  <TodoContainer key={todo.title} todo={todo} />
+                {todos.filter(t => t.project === p).map(todo => (
+                  <TodoContainer
+                    key={todo.title}
+                    todo={todo}
+                    enableEditMode={() =>
+                      enableTodoEditMode({ type: "TODO", id: todo.id })
+                    }
+                    disableEditMode={() =>
+                      disableTodoEditMode({ type: "TODO", id: todo.id })
+                    }
+                  />
                 ))}
-                <AddTodoContainer project={p} />
-              </Fragment>
+
+                <AddTodoContainer
+                  project={p}
+                  enableEditMode={() =>
+                    enableTodoEditMode({ type: "ADD_TODO", id: p })
+                  }
+                  disableEditMode={() =>
+                    disableTodoEditMode({ type: "ADD_TODO" })
+                  }
+                  mode={addTodoId === p ? Modes.EDIT : Modes.READ}
+                />
+              </div>
             );
           })}
         </Fragment>
@@ -48,13 +111,29 @@ const ProjectViewShell = ({ projectName, todos, projects }) => {
 
     default:
       return (
-        <Fragment>
+        <div className="todo-list-container">
           <header className="todo-list-header">{projectName}</header>
           {todos.map(todo => (
-            <TodoContainer key={todo.title} todo={todo} />
+            <TodoContainer
+              key={todo.title}
+              todo={todo}
+              enableEditMode={() =>
+                enableTodoEditMode({ type: "TODO", id: todo.id })
+              }
+              disableEditMode={() =>
+                disableTodoEditMode({ type: "TODO", id: todo.id })
+              }
+            />
           ))}
-          <AddTodoContainer project={projectName} />
-        </Fragment>
+          <AddTodoContainer
+            project={projectName}
+            enableEditMode={() =>
+              enableTodoEditMode({ type: "ADD_TODO", id: projectName })
+            }
+            disableEditMode={() => disableTodoEditMode({ type: "ADD_TODO" })}
+            mode={addTodoId === projectName ? Modes.EDIT : Modes.READ}
+          />
+        </div>
       );
   }
 };
@@ -75,8 +154,19 @@ const mapProjectsState = (state, ownProps) => {
   return {
     todos,
     projectName: ownProps.match.params.projectName || "Projects",
-    projects
+    projects,
+    addTodoId: state.addTodoId
   };
 };
 
-export const ProjectView = connect(mapProjectsState)(ProjectViewShell);
+const mapDispatchProjectsState = dispatch => {
+  return {
+    enableTodoEditMode: id => dispatch(enableTodoEditMode(id)),
+    disableTodoEditMode: id => dispatch(disableTodoEditMode(id))
+  };
+};
+
+export const ProjectView = connect(
+  mapProjectsState,
+  mapDispatchProjectsState
+)(ProjectViewShell);

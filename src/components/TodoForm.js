@@ -37,7 +37,7 @@ class TodoForm extends Component {
   clearTitle = () => this.setState({ title: "" });
 
   render() {
-    const { toggleView, view } = this.props;
+    const { view, disableEditMode } = this.props;
     return (
       <div className="todo-form-container">
         <div className="todo-form-input">
@@ -57,7 +57,7 @@ class TodoForm extends Component {
           <div onClick={this.handleSubmit} className="todo-form-save">
             {(view && view === "UPDATE" && "Save") || "Add Task"}
           </div>
-          <div onClick={toggleView} className="todo-form-cancel">
+          <div onClick={disableEditMode} className="todo-form-cancel">
             Cancel
           </div>
           <select

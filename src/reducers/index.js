@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import Todos from "./Todos";
+import { Types } from "../constants";
 
 // const initialState = {
 //   user: {
@@ -26,6 +27,21 @@ const _projects = [
   }
 ];
 
+const _addTodoId = null;
+
+const addTodoId = (state = _addTodoId, action) => {
+  switch (action.type) {
+    case Types.ADD_TODO_ENABLE_EDIT:
+      return action.id;
+
+    case Types.ADD_TODO_DISABLE_EDIT:
+      return null;
+
+    default:
+      return state;
+  }
+};
+
 const Projects = (state = _projects, action) => {
   switch (action.type) {
     default:
@@ -33,4 +49,4 @@ const Projects = (state = _projects, action) => {
   }
 };
 
-export default combineReducers({ Todos, Projects });
+export default combineReducers({ Todos, Projects, addTodoId });

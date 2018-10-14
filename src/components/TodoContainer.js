@@ -4,34 +4,24 @@ import { Link } from "react-router-dom";
 import { completeTodo, updateTodo, deleteTodo } from "../actions/Todos";
 import TodoForm from "./TodoForm";
 import "../css/TodoContainer.css";
+import { Modes } from "../constants";
 
 class TodoContainer extends Component {
-  state = {
-    view: "READ"
-  };
-
   updateTodo = (title, dueDate, project) => {
     this.props.updateTodo(this.props.todo.id, title, dueDate, project);
-    this.toggleView();
-  };
-
-  toggleView = () => {
-    switch (this.state.view) {
-      case "READ":
-        this.setState({ view: "EDIT" });
-        return;
-      default:
-        this.setState({ view: "READ" });
-        return;
-    }
   };
 
   render() {
-    const { todo, completeTodo, deleteTodo } = this.props;
-    const { view } = this.state;
+    const {
+      todo,
+      completeTodo,
+      deleteTodo,
+      enableEditMode,
+      disableEditMode
+    } = this.props;
 
-    switch (view) {
-      case "EDIT":
+    switch (todo.mode) {
+      case Modes.EDIT:
         return (
           <TodoForm
             view="UPDATE"
@@ -39,7 +29,7 @@ class TodoContainer extends Component {
             dueDate={todo.dueDate}
             project={todo.project}
             updateTodo={this.updateTodo}
-            toggleView={this.toggleView}
+            disableEditMode={disableEditMode}
           />
         );
       default:
@@ -52,7 +42,7 @@ class TodoContainer extends Component {
               />
             </div>
 
-            <div onClick={this.toggleView} className="todo-title">
+            <div onClick={enableEditMode} className="todo-title">
               {todo.title}
             </div>
             <Link

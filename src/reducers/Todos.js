@@ -1,4 +1,4 @@
-import { Types } from "../constants";
+import { Types, Modes } from "../constants";
 
 const _todos = [
   {
@@ -6,63 +6,72 @@ const _todos = [
     title: "Pay Bills - 1",
     completed: false,
     dueDate: "2018-10-07",
-    project: "Finances"
+    project: "Finances",
+    mode: Modes.READ
   },
   {
     id: 1,
     title: "Pay Bills - 2",
     completed: false,
     dueDate: "2018-10-08",
-    project: "Finances"
+    project: "Finances",
+    mode: Modes.READ
   },
   {
     id: 2,
     title: "Pay Bills - 3",
     completed: false,
     dueDate: "2018-10-01",
-    project: "Finances"
+    project: "Finances",
+    mode: Modes.READ
   },
   {
     id: 3,
     title: "Attend HOA Meeting - 1",
     completed: false,
     dueDate: "2018-09-29",
-    project: "Admin"
+    project: "Admin",
+    mode: Modes.READ
   },
   {
     id: 4,
     title: "Attend HOA Meeting - 2",
     completed: false,
     dueDate: "2018-10-06",
-    project: "Admin"
+    project: "Admin",
+    mode: Modes.READ
   },
   {
     id: 5,
     title: "Attend HOA Meeting - 3",
     completed: false,
     dueDate: "2018-10-09",
-    project: "Admin"
+    project: "Admin",
+    mode: Modes.READ
   },
   {
     id: 6,
     title: "Dental Exam",
     completed: false,
     dueDate: "2018-10-06",
-    project: "Guard"
+    project: "Guard",
+    mode: Modes.READ
   },
   {
     id: 7,
     title: "Submit Timesheet",
     completed: false,
     dueDate: "2018-10-07",
-    project: "Google"
+    project: "Google",
+    mode: Modes.READ
   },
   {
     id: 8,
     title: "Attend Training",
     completed: false,
     dueDate: "2018-09-30",
-    project: null
+    project: null,
+    mode: Modes.READ
   }
 ];
 
@@ -94,7 +103,8 @@ const todos = (state = _todos, action) => {
             ...t,
             title: action.title,
             dueDate: action.dueDate,
-            project: action.project || null
+            project: action.project || null,
+            mode: Modes.READ
           };
         }
         return t;
@@ -102,6 +112,21 @@ const todos = (state = _todos, action) => {
 
     case Types.TODO_DELETE:
       return state.filter(t => t.id !== action.id);
+
+    case Types.TODO_ENABLE_EDIT:
+      return state.map(t => {
+        return t.id === action.id
+          ? { ...t, mode: Modes.EDIT }
+          : { ...t, mode: Modes.READ };
+      });
+
+    case Types.TODO_DISABLE_EDIT:
+      return state.map(t => {
+        return t.id === action.id ? { ...t, mode: Modes.READ } : t;
+      });
+
+    case Types.TODO_DISABLE_EDIT_ALL:
+      return state.map(t => ({ ...t, mode: Modes.READ }));
 
     default:
       return state;

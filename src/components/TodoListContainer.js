@@ -1,11 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
+import { enableTodoEditMode, disableTodoEditMode } from "../actions/Todos";
 import * as moment from "moment";
 import TodoContainer from "./TodoContainer";
 import AddTodoContainer from "./AddTodoContainer";
+import { Modes } from "../constants";
 import "../css/TodoListContainer.css";
 
-const TodoListContainer = ({ date, todos }) => {
+const TodoListContainer = ({
+  date,
+  todos,
+  addTodoId,
+  enableTodoEditMode,
+  disableTodoEditMode
+}) => {
   const title = date
     ? moment(date).calendar(null, {
         sameDay: "[Today]",
@@ -34,11 +42,27 @@ const TodoListContainer = ({ date, todos }) => {
       </header>
       <div className="todo-list-content">
         {todos.map(todo => (
-          <TodoContainer key={todo.title} todo={todo} />
+          <TodoContainer
+            key={todo.title}
+            todo={todo}
+            enableEditMode={() =>
+              enableTodoEditMode({ type: "TODO", id: todo.id })
+            }
+            disableEditMode={() =>
+              disableTodoEditMode({ type: "TODO", id: todo.id })
+            }
+          />
         ))}
       </div>
       {(title !== "Overdue" && (
-        <AddTodoContainer dueDate={moment(date).format("YYYY-MM-DD")} />
+        <AddTodoContainer
+          dueDate={moment(date).format("YYYY-MM-DD")}
+          enableEditMode={() =>
+            enableTodoEditMode({ type: "ADD_TODO", id: date })
+          }
+          disableEditMode={() => disableTodoEditMode({ type: "ADD_TODO" })}
+          mode={addTodoId === date ? Modes.EDIT : Modes.READ}
+        />
       )) || <div className="todo-list-add-todo-placeholder" />}
     </div>
   );
@@ -54,8 +78,19 @@ const mapState = (state, ownProps) => {
       );
 
   return {
-    todos
+    todos,
+    addTodoId: state.addTodoId
   };
 };
 
-export default connect(mapState)(TodoListContainer);
+const mapActions = dispatch => {
+  return {
+    enableTodoEditMode: id => dispatch(enableTodoEditMode(id)),
+    disableTodoEditMode: id => dispatch(disableTodoEditMode(id))
+  };
+};
+
+export default connect(
+  mapState,
+  mapActions
+)(TodoListContainer);

@@ -3,10 +3,11 @@ import { connect } from "react-redux";
 import { addTodo } from "../actions/Todos";
 import TodoForm from "./TodoForm";
 import "../css/AddTodoContainer.css";
+import { Modes } from "../constants";
 
-const AddTodoButton = ({ toggleView }) => {
+const AddTodoButton = ({ enableEditMode }) => {
   return (
-    <div onClick={toggleView} className="add-todo-button-container">
+    <div onClick={enableEditMode} className="add-todo-button-container">
       <div className="add-todo-button-plus">+</div>
       <div className="add-todo-button-text">Add Task</div>
     </div>
@@ -14,39 +15,28 @@ const AddTodoButton = ({ toggleView }) => {
 };
 
 class AddTodoContainer extends Component {
-  state = {
-    view: "BUTTON_VIEW"
-  };
-
   addTodo = (title, dueDate, project) => {
     this.props.addTodo(title, dueDate, project);
-    this.toggleView();
-  };
-
-  toggleView = () => {
-    switch (this.state.view) {
-      case "BUTTON_VIEW":
-        this.setState({ view: "FORM_VIEW" });
-        return;
-      default:
-        this.setState({ view: "BUTTON_VIEW" });
-        return;
-    }
   };
 
   render() {
-    const { project, dueDate } = this.props;
-    const { view } = this.state;
+    const {
+      project,
+      dueDate,
+      enableEditMode,
+      disableEditMode,
+      mode
+    } = this.props;
 
-    switch (view) {
-      case "BUTTON_VIEW":
-        return <AddTodoButton toggleView={this.toggleView} />;
+    switch (mode) {
+      case Modes.READ:
+        return <AddTodoButton enableEditMode={enableEditMode} />;
 
-      case "FORM_VIEW":
+      case Modes.EDIT:
         return (
           <TodoForm
             addTodo={this.addTodo}
-            toggleView={this.toggleView}
+            disableEditMode={disableEditMode}
             project={project}
             dueDate={dueDate}
           />

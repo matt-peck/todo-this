@@ -23,3 +23,35 @@ export const deleteTodo = id => {
     dispatch({ type: Types.TODO_DELETE, id });
   };
 };
+
+export const enableTodoEditMode = ({ type, id }) => {
+  return async dispatch => {
+    switch (type) {
+      case "TODO":
+        dispatch({ type: Types.ADD_TODO_DISABLE_EDIT });
+        return dispatch({ type: Types.TODO_ENABLE_EDIT, id });
+
+      case "ADD_TODO":
+        dispatch({ type: Types.TODO_DISABLE_EDIT_ALL });
+        return dispatch({ type: Types.ADD_TODO_ENABLE_EDIT, id });
+
+      default:
+        return;
+    }
+  };
+};
+
+export const disableTodoEditMode = ({ type, id }) => {
+  return async dispatch => {
+    switch (type) {
+      case "TODO":
+        return dispatch({ type: Types.TODO_DISABLE_EDIT, id });
+
+      case "ADD_TODO":
+        return dispatch({ type: Types.ADD_TODO_DISABLE_EDIT });
+
+      default:
+        return;
+    }
+  };
+};
