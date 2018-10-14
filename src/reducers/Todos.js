@@ -5,7 +5,7 @@ const _todos = [
     id: 0,
     title: "Pay Bills - 1",
     completed: false,
-    dueDate: "2018-10-07",
+    dueDate: "2018-10-15",
     project: "Finances",
     mode: Modes.READ
   },
@@ -13,7 +13,7 @@ const _todos = [
     id: 1,
     title: "Pay Bills - 2",
     completed: false,
-    dueDate: "2018-10-08",
+    dueDate: "2018-10-16",
     project: "Finances",
     mode: Modes.READ
   },
@@ -21,7 +21,7 @@ const _todos = [
     id: 2,
     title: "Pay Bills - 3",
     completed: false,
-    dueDate: "2018-10-01",
+    dueDate: "2018-10-14",
     project: "Finances",
     mode: Modes.READ
   },
@@ -29,7 +29,7 @@ const _todos = [
     id: 3,
     title: "Attend HOA Meeting - 1",
     completed: false,
-    dueDate: "2018-09-29",
+    dueDate: "2018-10-18",
     project: "Admin",
     mode: Modes.READ
   },
@@ -37,7 +37,7 @@ const _todos = [
     id: 4,
     title: "Attend HOA Meeting - 2",
     completed: false,
-    dueDate: "2018-10-06",
+    dueDate: "2018-10-14",
     project: "Admin",
     mode: Modes.READ
   },
@@ -45,7 +45,7 @@ const _todos = [
     id: 5,
     title: "Attend HOA Meeting - 3",
     completed: false,
-    dueDate: "2018-10-09",
+    dueDate: "2018-10-15",
     project: "Admin",
     mode: Modes.READ
   },
@@ -53,7 +53,7 @@ const _todos = [
     id: 6,
     title: "Dental Exam",
     completed: false,
-    dueDate: "2018-10-06",
+    dueDate: "2018-10-15",
     project: "Guard",
     mode: Modes.READ
   },
@@ -61,7 +61,7 @@ const _todos = [
     id: 7,
     title: "Submit Timesheet",
     completed: false,
-    dueDate: "2018-10-07",
+    dueDate: "2018-10-14",
     project: "Google",
     mode: Modes.READ
   },
@@ -69,7 +69,7 @@ const _todos = [
     id: 8,
     title: "Attend Training",
     completed: false,
-    dueDate: "2018-09-30",
+    dueDate: "2018-10-17",
     project: null,
     mode: Modes.READ
   }

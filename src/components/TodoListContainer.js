@@ -32,6 +32,8 @@ const TodoListContainer = ({
         ? moment(date).format("MMM D")
         : "";
 
+  if (title === "Overdue" && todos.length === 0) return <div />;
+
   return (
     <div className="todo-list-container">
       <header className="todo-list-header">
