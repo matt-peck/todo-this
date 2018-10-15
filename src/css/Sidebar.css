@@ -12,8 +12,9 @@
 }
 
 .sidebar .nav-link {
+  box-sizing: border-box;
   display: block;
-  height: 22px;
+  height: 40px;
   line-height: 22px;
   color: #333;
   text-decoration: none;
@@ -23,13 +24,15 @@
   padding-top: 9px;
   padding-bottom: 9px;
   padding-right: 16px;
+  cursor: pointer;
 }
 
 .sidebar .nav-link:hover {
   background-color: #fff;
 }
 
-.sidebar .nav-link.active {
+.sidebar .nav-link.active,
+.sidebar .nav-link.nav-link.projects-list-item.active {
   background-color: #fff;
   font-weight: bold;
 }
@@ -54,8 +57,22 @@
   font-weight: bold;
 }
 
+.sidebar .nav-link-icon.projects {
+  transition: transform 0.2s ease-out;
+}
+
 .sidebar .nav-link.projects .plus {
   font-size: 28px;
   font-weight: 200;
   float: right;
+}
+
+.sidebar .project-lists-container {
+  height: 0px;
+  overflow: hidden;
+  transition: height 0.1s ease-out;
+}
+
+.sidebar .nav-link.projects-list-item {
+  padding-left: 38px;
 }
