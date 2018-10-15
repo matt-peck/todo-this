@@ -20,7 +20,14 @@ class Sidebar extends Component {
   };
 
   render() {
-    const { projects, location } = this.props;
+    const {
+      projects,
+      todos,
+      location,
+      inboxCount,
+      todayCount,
+      weekCount
+    } = this.props;
     const { isOpen } = this.state;
 
     const page = location.pathname;
@@ -33,6 +40,7 @@ class Sidebar extends Component {
         >
           <FontAwesomeIcon className="nav-link-icon" icon={faInbox} />
           Inbox
+          <span className="counter">{inboxCount}</span>
         </Link>
         <Link
           className={`nav-link ${page === "/today" && "active"}`}
@@ -41,10 +49,12 @@ class Sidebar extends Component {
           <FontAwesomeIcon className="nav-link-icon today" icon={todayCal} />
           <span className="today-text">{today}</span>
           Today
+          <span className="counter">{todayCount}</span>
         </Link>
         <Link className={`nav-link ${page === "/week" && "active"}`} to="/week">
           <FontAwesomeIcon className="nav-link-icon" icon={faCalendarAlt} />
           Next 7 Days
+          <span className="counter">{weekCount}</span>
         </Link>
         <div onClick={this.toggleProjects} className="nav-link projects">
           <FontAwesomeIcon
@@ -73,6 +83,9 @@ class Sidebar extends Component {
               >
                 {/* <FontAwesomeIcon className="nav-link-icon" icon={faAngleRight} /> */}
                 {p}
+                <span className="counter">
+                  {todos.filter(t => t.project === p).length || ""}
+                </span>
               </Link>
             );
           })}
@@ -85,8 +98,20 @@ const mapState = state => {
   const projects = state.Projects.reduce((list, p) => {
     return [...list, p.name, ...p.subProjects.map(s => s.name)];
   }, []);
+
+  state.Todos.forEach(t => {
+    console.log(t, moment().isSame(t.dueDate, "day"));
+  });
+
   return {
-    projects
+    projects,
+    todos: state.Todos,
+    inboxCount: state.Todos.filter(t => !t.project).length,
+    todayCount: state.Todos.filter(t => moment().isSame(t.dueDate, "day"))
+      .length,
+    weekCount: state.Todos.filter(t =>
+      moment(t.dueDate).isBefore(moment().add(7, "days"), "day")
+    ).length
   };
 };
 export default withRouter(connect(mapState)(Sidebar));

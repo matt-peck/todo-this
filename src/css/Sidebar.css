@@ -27,6 +27,12 @@
   cursor: pointer;
 }
 
+.sidebar .nav-link .counter {
+  color: #aaa;
+  font-size: 11px;
+  margin-left: 5px;
+}
+
 .sidebar .nav-link:hover {
   background-color: #fff;
 }
