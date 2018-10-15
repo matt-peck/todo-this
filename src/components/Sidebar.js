@@ -20,14 +20,7 @@ class Sidebar extends Component {
   };
 
   render() {
-    const {
-      projects,
-      todos,
-      location,
-      inboxCount,
-      todayCount,
-      weekCount
-    } = this.props;
+    const { projects, todos, location } = this.props;
     const { isOpen } = this.state;
 
     const page = location.pathname;
@@ -40,7 +33,9 @@ class Sidebar extends Component {
         >
           <FontAwesomeIcon className="nav-link-icon" icon={faInbox} />
           Inbox
-          <span className="counter">{inboxCount}</span>
+          <span className="counter">
+            {todos.filter(t => !t.project).length || ""}
+          </span>
         </Link>
         <Link
           className={`nav-link ${page === "/today" && "active"}`}
@@ -49,12 +44,18 @@ class Sidebar extends Component {
           <FontAwesomeIcon className="nav-link-icon today" icon={todayCal} />
           <span className="today-text">{today}</span>
           Today
-          <span className="counter">{todayCount}</span>
+          <span className="counter">
+            {todos.filter(t => moment().isSame(t.dueDate, "day")).length || ""}
+          </span>
         </Link>
         <Link className={`nav-link ${page === "/week" && "active"}`} to="/week">
           <FontAwesomeIcon className="nav-link-icon" icon={faCalendarAlt} />
           Next 7 Days
-          <span className="counter">{weekCount}</span>
+          <span className="counter">
+            {todos.filter(t =>
+              moment(t.dueDate).isBefore(moment().add(7, "days"), "day")
+            ).length || ""}
+          </span>
         </Link>
         <div onClick={this.toggleProjects} className="nav-link projects">
           <FontAwesomeIcon
@@ -105,13 +106,7 @@ const mapState = state => {
 
   return {
     projects,
-    todos: state.Todos,
-    inboxCount: state.Todos.filter(t => !t.project).length,
-    todayCount: state.Todos.filter(t => moment().isSame(t.dueDate, "day"))
-      .length,
-    weekCount: state.Todos.filter(t =>
-      moment(t.dueDate).isBefore(moment().add(7, "days"), "day")
-    ).length
+    todos: state.Todos
   };
 };
 export default withRouter(connect(mapState)(Sidebar));
