@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { addTodo } from "../actions/Todos";
-import TodoForm from "./TodoForm";
-import "../css/AddTodoContainer.css";
 import { Modes } from "../constants";
+import TodoForm from "./TodoForm";
+import "../css/AddTodoContainer.scss";
 
 const AddTodoButton = ({ enableEditMode }) => {
   return (

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "../css/TodoForm.css";
+import "../css/TodoForm.scss";
 
 class TodoForm extends Component {
   state = {

@@ -1,0 +1,72 @@
+.todo-read-container {
+  display: grid;
+  grid-gap: 0px;
+  grid-template-columns: 35px 1fr 60px 30px;
+  grid-template-rows: 44px;
+  grid-template-areas: "complete title metadata menu";
+  align-items: center;
+
+  &:hover .todo-delete-container {
+    display: block;
+  }
+
+  .todo-complete-btn-container {
+    height: 100%;
+    grid-area: complete;
+    padding: 12px 9px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+
+    .todo-complete-btn {
+      width: 18px;
+      height: 18px;
+      margin-right: 15px;
+      line-height: 43px;
+      border: 1px solid darkGray;
+      border-radius: 100%;
+
+      &:hover {
+        background-color: lightgray;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .todo-title {
+    grid-area: title;
+    align-content: center;
+    padding-left: 8px;
+    font-size: 14px;
+    line-height: 43px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+  }
+
+  .todo-assigned-project {
+    grid-area: metadata;
+    align-content: center;
+    line-height: 43px;
+    border-bottom: 1px solid rgb(240, 240, 240);
+    font-size: 11px;
+    font-weight: normal;
+    color: #999;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .todo-delete-container {
+    display: none;
+    grid-area: menu;
+    align-content: center;
+    cursor: pointer;
+
+    .todo-delete-btn {
+      font-size: 12px;
+      color: #333;
+      font-weight: 600;
+      text-align: center;
+    }
+  }
+}

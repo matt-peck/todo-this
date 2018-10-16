@@ -8,7 +8,6 @@ import logger from "redux-logger";
 import thunk from "redux-thunk";
 import { BrowserRouter } from "react-router-dom";
 import App from "./components/App";
-import "./css/index.css";
 
 const middleware = applyMiddleware(logger, thunk);
 const store = createStore(mainReducer, {}, middleware);

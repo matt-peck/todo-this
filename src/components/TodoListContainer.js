@@ -5,7 +5,7 @@ import * as moment from "moment";
 import TodoContainer from "./TodoContainer";
 import AddTodoContainer from "./AddTodoContainer";
 import { Modes } from "../constants";
-import "../css/TodoListContainer.css";
+import "../css/TodoListContainer.scss";
 
 const TodoListContainer = ({
   date,

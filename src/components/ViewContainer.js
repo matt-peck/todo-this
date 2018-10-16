@@ -2,7 +2,7 @@ import React from "react";
 import { Route, withRouter } from "react-router-dom";
 import { TodayView, WeekView } from "./DateViews";
 import { InboxView, ProjectView } from "./ProjectViews";
-import "../css/ViewContainer.css";
+import "../css/ViewContainer.scss";
 
 const ViewContainer = () => {
   return (

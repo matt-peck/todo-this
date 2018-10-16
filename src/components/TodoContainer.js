@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { Modes } from "../constants";
 import { completeTodo, updateTodo, deleteTodo } from "../actions/Todos";
 import TodoForm from "./TodoForm";
-import "../css/TodoContainer.css";
-import { Modes } from "../constants";
+import "../css/TodoContainer.scss";
 
 class TodoContainer extends Component {
   updateTodo = (title, dueDate, project) => {

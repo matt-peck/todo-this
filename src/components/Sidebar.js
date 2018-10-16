@@ -8,7 +8,7 @@ import {
   faCalendar as todayCal,
   faCalendarAlt
 } from "@fortawesome/free-regular-svg-icons";
-import "../css/Sidebar.css";
+import "../css/Sidebar.scss";
 
 class Sidebar extends Component {
   state = {
