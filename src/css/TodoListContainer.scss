@@ -11,6 +11,13 @@
     font-weight: bold;
     padding-bottom: 7px;
 
+    &.project {
+      font-size: 20px;
+      font-weight: 400;
+      border: none;
+      margin-bottom: 6px;
+    }
+
     .todo-list-title.overdue {
       color: red;
     }

@@ -75,11 +75,10 @@ const ProjectViewShell = ({
     case "Projects":
       return (
         <Fragment>
-          <header className="view-header">{projectName}</header>
           {projects.map(p => {
             return (
               <div key={p} className="todo-list-container">
-                <header className="todo-list-header">{p}</header>
+                <header className="todo-list-header project">{p}</header>
                 {todos.filter(t => t.project === p).map(todo => (
                   <TodoContainer
                     key={todo.title}
@@ -112,7 +111,7 @@ const ProjectViewShell = ({
     default:
       return (
         <div className="todo-list-container">
-          <header className="todo-list-header">{projectName}</header>
+          <header className="todo-list-header project">{projectName}</header>
           {todos.map(todo => (
             <TodoContainer
               key={todo.title}
