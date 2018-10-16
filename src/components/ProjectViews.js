@@ -46,7 +46,7 @@ class InboxViewShell extends Component {
 
 const mapInboxState = state => {
   return {
-    todos: state.Todos.filter(t => !t.project),
+    todos: state.todos.filter(t => !t.project),
     addTodoId: state.addTodoId
   };
 };
@@ -141,12 +141,12 @@ const mapProjectsState = (state, ownProps) => {
   const { params } = ownProps.match;
 
   const todos = params.projectName
-    ? state.Todos.filter(
+    ? state.todos.filter(
         t => !t.completed && t.project === ownProps.match.params.projectName
       )
-    : state.Todos.filter(t => !t.completed && t.project);
+    : state.todos.filter(t => !t.completed && t.project);
 
-  const projects = state.Projects.reduce((list, p) => {
+  const projects = state.projects.reduce((list, p) => {
     return [...list, p.name, ...p.subProjects.map(s => s.name)];
   }, []);
 

@@ -72,12 +72,14 @@ const TodoListContainer = ({
 
 const mapState = (state, ownProps) => {
   const todos = ownProps.overdue
-    ? state.Todos.filter(t => !t.completed).filter(t =>
-        moment(t.dueDate, "YYYY-MM-DD").isBefore(moment(), "day")
-      )
-    : state.Todos.filter(t => !t.completed).filter(t =>
-        moment(t.dueDate, "YYYY-MM-DD").isSame(ownProps.date, "day")
-      );
+    ? state.todos
+        .filter(t => !t.completed)
+        .filter(t => moment(t.dueDate, "YYYY-MM-DD").isBefore(moment(), "day"))
+    : state.todos
+        .filter(t => !t.completed)
+        .filter(t =>
+          moment(t.dueDate, "YYYY-MM-DD").isSame(ownProps.date, "day")
+        );
 
   return {
     todos,

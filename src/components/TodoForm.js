@@ -66,7 +66,7 @@ class TodoForm extends Component {
             onChange={e => this.setState({ project: e.target.value })}
           >
             <option value="">---</option>
-            {this.props.Projects.map(p => (
+            {this.props.projects.map(p => (
               <option key={p} value={p}>
                 {p}
               </option>
@@ -79,12 +79,12 @@ class TodoForm extends Component {
 }
 
 const mapFormState = state => {
-  const Projects = state.Projects.reduce((list, p) => {
+  const projects = state.projects.reduce((list, p) => {
     return [...list, p.name, ...p.subProjects.map(s => s.name)];
   }, []);
 
   return {
-    Projects
+    projects
   };
 };
 

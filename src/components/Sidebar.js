@@ -96,13 +96,13 @@ class Sidebar extends Component {
   }
 }
 const mapState = state => {
-  const projects = state.Projects.reduce((list, p) => {
+  const projects = state.projects.reduce((list, p) => {
     return [...list, p.name, ...p.subProjects.map(s => s.name)];
   }, []);
 
   return {
     projects,
-    todos: state.Todos
+    todos: state.todos
   };
 };
 export default withRouter(connect(mapState)(Sidebar));
