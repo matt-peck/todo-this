@@ -11,7 +11,7 @@ class TodoForm extends Component {
 
   addTodo = () => {
     this.props.addTodo(
-      this.state.title,
+      this.state.title.trim(),
       this.state.dueDate,
       this.state.project
     );
@@ -20,7 +20,7 @@ class TodoForm extends Component {
 
   updateTodo = () => {
     this.props.updateTodo(
-      this.state.title,
+      this.state.title.trim(),
       this.state.dueDate,
       this.state.project
     );

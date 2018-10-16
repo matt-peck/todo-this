@@ -8,12 +8,14 @@ export const completeTodo = id => {
 
 export const addTodo = (title, dueDate, project) => {
   return async dispatch => {
+    if (!title) return dispatch({ type: Types.ADD_TODO_DISABLE_EDIT });
     dispatch({ type: Types.TODO_ADD, title, dueDate, project });
   };
 };
 
 export const updateTodo = (id, title, dueDate, project) => {
   return async dispatch => {
+    if (!title) return dispatch({ type: Types.TODO_DISABLE_EDIT, id });
     dispatch({ type: Types.TODO_UPDATE, id, title, dueDate, project });
   };
 };

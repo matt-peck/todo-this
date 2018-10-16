@@ -8,7 +8,7 @@ import "../css/TodoContainer.scss";
 
 class TodoContainer extends Component {
   updateTodo = (title, dueDate, project) => {
-    this.props.updateTodo(this.props.todo.id, title, dueDate, project);
+    this.props.updateTodo(this.props.todo.id, title.trim(), dueDate, project);
   };
 
   render() {

@@ -100,10 +100,6 @@ const mapState = state => {
     return [...list, p.name, ...p.subProjects.map(s => s.name)];
   }, []);
 
-  state.Todos.forEach(t => {
-    console.log(t, moment().isSame(t.dueDate, "day"));
-  });
-
   return {
     projects,
     todos: state.Todos

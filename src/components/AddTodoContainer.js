@@ -16,7 +16,7 @@ const AddTodoButton = ({ enableEditMode }) => {
 
 class AddTodoContainer extends Component {
   addTodo = (title, dueDate, project) => {
-    this.props.addTodo(title, dueDate, project);
+    this.props.addTodo(title.trim(), dueDate, project);
   };
 
   render() {
