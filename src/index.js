@@ -13,7 +13,7 @@ const middleware = applyMiddleware(logger, thunk);
 const store = createStore(mainReducer, {}, middleware);
 
 ReactDOM.render(
-  <BrowserRouter>
+  <BrowserRouter basename="/week">
     <Provider store={store}>
       <App />
     </Provider>
