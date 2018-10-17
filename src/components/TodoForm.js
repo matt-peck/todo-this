@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
+import { SingleDatePicker } from "react-dates";
+import * as moment from "moment";
 import "../css/TodoForm.scss";
 
 class TodoForm extends Component {
   state = {
     title: this.props.title || "",
     dueDate: this.props.dueDate || "",
-    project: this.props.project || ""
+    project: this.props.project || "",
+    date: moment(this.props.dueDate) || null,
+    focused: false
   };
 
   addTodo = () => {
@@ -47,10 +53,24 @@ class TodoForm extends Component {
             value={this.state.title}
             onChange={e => this.setState({ title: e.target.value })}
           />
-          <input
+          {/* <input
             type="date"
             value={this.state.dueDate}
             onChange={e => this.setState({ dueDate: e.target.value })}
+          /> */}
+          <SingleDatePicker
+            date={this.state.date}
+            onDateChange={date => this.setState({ date })}
+            focused={this.state.focused}
+            onFocusChange={({ focused }) => this.setState({ focused })}
+            id="schedule"
+            numberOfMonths={1}
+            small={true} //  input size
+            hideKeyboardShortcutsPanel={true}
+            displayFormat="MMM DD"
+            orientation="horizontal"
+            anchorDirection="left"
+            daySize={30}
           />
         </div>
         <div className="todo-form-actions">

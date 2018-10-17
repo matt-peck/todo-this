@@ -7,7 +7,7 @@ import "../css/ViewContainer.scss";
 const ViewContainer = () => {
   return (
     <article className="view-container">
-      <Redirect to="/week" from="/" />
+      <Redirect to="/week" exact from="/" />
       <Route path="/inbox" component={InboxView} />
       <Route path="/today" component={TodayView} />
       <Route path="/week" component={WeekView} />

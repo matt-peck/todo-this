@@ -28,15 +28,31 @@
     font-size: 14px;
   }
 
-  .todo-form-input input:last-child {
-    grid-area: date;
-    height: 100%;
-    border: none;
+  .SingleDatePicker.SingleDatePicker_1 {
     border-left: 1px solid rgb(238, 238, 238);
-    outline: none;
-    font-size: 14px;
-    padding-left: 10px;
+
+    .SingleDatePickerInput.SingleDatePickerInput_1.SingleDatePickerInput__withBorder.SingleDatePickerInput__withBorder_2 {
+      border: none;
+    }
+
+    .DateInput_fang.DateInput_fang_1 {
+      top: 25px !important;
+    }
+
+    .SingleDatePicker_picker.SingleDatePicker_picker_1.SingleDatePicker_picker__directionLeft.SingleDatePicker_picker__directionLeft_2 {
+      top: 35px !important;
+    }
   }
+
+  // .todo-form-input input:last-child {
+  //   grid-area: date;
+  //   height: 100%;
+  //   border: none;
+  //   border-left: 1px solid rgb(238, 238, 238);
+  //   outline: none;
+  //   font-size: 14px;
+  //   padding-left: 10px;
+  // }
 
   .todo-form-actions {
     display: grid;

@@ -11,6 +11,7 @@
     "moment": "^2.22.2",
     "node-sass": "^4.9.4",
     "react": "^16.5.2",
+    "react-dates": "^18.1.1",
     "react-dom": "^16.5.2",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.3.1",
