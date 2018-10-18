@@ -1,3 +1,5 @@
+import { Types } from "../constants";
+
 const _projects = [
   {
     name: "Work",
@@ -11,6 +13,8 @@ const _projects = [
 
 const projects = (state = _projects, action) => {
   switch (action.type) {
+    case Types.ADD_PROJECT:
+      return [...state, { name: action.name, subProjects: [] }];
     default:
       return state;
   }

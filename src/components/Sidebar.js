@@ -9,19 +9,25 @@ import {
   faCalendarAlt
 } from "@fortawesome/free-regular-svg-icons";
 import "../css/Sidebar.scss";
+import ProjectForm from "./ProjectForm";
 
 class Sidebar extends Component {
   state = {
-    isOpen: false
+    isOpen: false,
+    isProjectFormOpen: false
   };
 
   toggleProjects = () => {
     this.setState(prev => ({ isOpen: !prev.isOpen }));
   };
 
+  openProjectForm = () => {
+    this.setState({ isProjectFormOpen: true });
+  };
+
   render() {
     const { projects, todos, location } = this.props;
-    const { isOpen } = this.state;
+    const { isOpen, isProjectFormOpen } = this.state;
 
     const page = location.pathname;
     const today = moment().format("DD");
@@ -66,11 +72,13 @@ class Sidebar extends Component {
             icon={faAngleRight}
           />
           Projects
-          {/* <span className="plus">+</span> */}
+          {/* <span className="plus" onClick={this.openProjectForm}>
+            +
+          </span> */}
         </div>
         <div
           style={{
-            height: isOpen ? `${projects.length * 40}px` : "0px"
+            height: isOpen ? `${projects.length * 40 + 80}px` : "0px"
           }}
           className="project-lists-container"
         >
@@ -90,6 +98,20 @@ class Sidebar extends Component {
               </Link>
             );
           })}
+          {(isProjectFormOpen && (
+            <ProjectForm
+              isOpen={isProjectFormOpen}
+              cancel={() => this.setState({ isProjectFormOpen: false })}
+            />
+          )) || (
+            <div
+              onClick={() => this.setState({ isProjectFormOpen: true })}
+              className="add-todo-button-container"
+            >
+              <div className="add-todo-button-plus">+</div>
+              <div className="add-todo-button-text">Add Project</div>
+            </div>
+          )}
         </div>
       </div>
     );
