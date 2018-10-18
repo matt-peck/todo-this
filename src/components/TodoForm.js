@@ -9,9 +9,8 @@ import "../css/TodoForm.scss";
 class TodoForm extends Component {
   state = {
     title: this.props.title || "",
-    dueDate: this.props.dueDate || "",
+    dueDate: moment(this.props.dueDate) || null,
     project: this.props.project || "",
-    date: moment(this.props.dueDate) || null,
     focused: false
   };
 
@@ -53,14 +52,9 @@ class TodoForm extends Component {
             value={this.state.title}
             onChange={e => this.setState({ title: e.target.value })}
           />
-          {/* <input
-            type="date"
-            value={this.state.dueDate}
-            onChange={e => this.setState({ dueDate: e.target.value })}
-          /> */}
           <SingleDatePicker
-            date={this.state.date}
-            onDateChange={date => this.setState({ date })}
+            date={this.state.dueDate}
+            onDateChange={dueDate => this.setState({ dueDate })}
             focused={this.state.focused}
             onFocusChange={({ focused }) => this.setState({ focused })}
             id="schedule"
@@ -71,6 +65,7 @@ class TodoForm extends Component {
             orientation="horizontal"
             anchorDirection="left"
             daySize={30}
+            isOutsideRange={() => false}
           />
         </div>
         <div className="todo-form-actions">
