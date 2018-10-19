@@ -12,7 +12,7 @@
     border: 2px solid #f0f0f0;
     border-radius: 3px;
     font-size: 14px;
-    padding: 3px;
+    // padding: 3px;
     margin-right: 30px;
 
     .title {
@@ -55,21 +55,26 @@
         }
       }
     }
-  }
 
-  .SingleDatePicker.SingleDatePicker_1 {
-    border-left: 1px solid rgb(238, 238, 238);
+    .SingleDatePicker.SingleDatePicker_1 {
+      border-left: 1px solid rgb(238, 238, 238);
 
-    .SingleDatePickerInput.SingleDatePickerInput_1.SingleDatePickerInput__withBorder.SingleDatePickerInput__withBorder_2 {
-      border: none;
-    }
+      .SingleDatePickerInput.SingleDatePickerInput_1.SingleDatePickerInput__withBorder.SingleDatePickerInput__withBorder_2 {
+        border: none;
+      }
 
-    .DateInput_fang.DateInput_fang_1 {
-      top: 25px !important;
-    }
+      .DateInput_fang.DateInput_fang_1 {
+        top: 25px !important;
+      }
 
-    .SingleDatePicker_picker.SingleDatePicker_picker_1.SingleDatePicker_picker__directionLeft.SingleDatePicker_picker__directionLeft_2 {
-      top: 35px !important;
+      .SingleDatePicker_picker.SingleDatePicker_picker_1.SingleDatePicker_picker__directionLeft.SingleDatePicker_picker__directionLeft_2 {
+        top: 35px !important;
+      }
+
+      .DateInput_input.DateInput_input_1.DateInput_input__small.DateInput_input__small_2 {
+        outline: none;
+        border: none;
+      }
     }
   }
 

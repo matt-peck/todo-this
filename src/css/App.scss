@@ -9,7 +9,9 @@ body,
     Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   -webkit-font-smoothing: antialiased;
 
-  div {
+  div,
+  input,
+  p {
     box-sizing: border-box;
   }
 

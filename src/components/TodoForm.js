@@ -63,6 +63,7 @@ class TodoForm extends Component {
               }}
               onChange={e => this.setState({ title: e.target.value })}
             />
+
             {this.state.isProjectListOpen && (
               <div className="todo-form-project-list">
                 {projects.map(p => {
@@ -84,6 +85,7 @@ class TodoForm extends Component {
               </div>
             )}
           </div>
+
           <SingleDatePicker
             date={this.state.dueDate}
             onDateChange={dueDate => this.setState({ dueDate })}
@@ -111,15 +113,17 @@ class TodoForm extends Component {
             Cancel
           </div>
 
-          <FontAwesomeIcon
-            onClick={() =>
-              this.setState(prev => ({
-                isProjectListOpen: !prev.isProjectListOpen
-              }))
-            }
-            className="todo-form-projects-button"
-            icon={faProjectDiagram}
-          />
+          {projects.length > 0 && (
+            <FontAwesomeIcon
+              onClick={() =>
+                this.setState(prev => ({
+                  isProjectListOpen: !prev.isProjectListOpen
+                }))
+              }
+              className="todo-form-projects-button"
+              icon={faProjectDiagram}
+            />
+          )}
         </div>
       </div>
     );
