@@ -8,8 +8,8 @@ import {
   faCalendar as todayCal,
   faCalendarAlt
 } from "@fortawesome/free-regular-svg-icons";
-import "../css/Sidebar.scss";
 import ProjectForm from "./ProjectForm";
+import "../css/Sidebar.scss";
 
 class Sidebar extends Component {
   state = {
@@ -72,9 +72,7 @@ class Sidebar extends Component {
             icon={faAngleRight}
           />
           Projects
-          {/* <span className="plus" onClick={this.openProjectForm}>
-            +
-          </span> */}
+          {/* <span className="plus" onClick={this.openProjectForm}>+</span> */}
         </div>
         <div
           style={{
@@ -85,15 +83,15 @@ class Sidebar extends Component {
           {projects.map(p => {
             return (
               <Link
-                key={p}
+                key={p.name}
                 className={`nav-link  projects-list-item ${page ===
-                  `/projects/${p}` && "active"}`}
-                to={`/projects/${p}`}
+                  `/projects/${p.name}` && "active"}`}
+                to={`/projects/${p.name}`}
               >
                 {/* <FontAwesomeIcon className="nav-link-icon" icon={faAngleRight} /> */}
-                {p}
+                {p.name}
                 <span className="counter">
-                  {todos.filter(t => t.project === p).length || ""}
+                  {todos.filter(t => t.project === p.name).length || ""}
                 </span>
               </Link>
             );
@@ -118,13 +116,10 @@ class Sidebar extends Component {
   }
 }
 const mapState = state => {
-  const projects = state.projects.reduce((list, p) => {
-    return [...list, p.name, ...p.subProjects.map(s => s.name)];
-  }, []);
-
   return {
-    projects,
+    projects: state.projects,
     todos: state.todos
   };
 };
+
 export default withRouter(connect(mapState)(Sidebar));

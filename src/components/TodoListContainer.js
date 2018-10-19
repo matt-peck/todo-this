@@ -1,19 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { enableTodoEditMode, disableTodoEditMode } from "../actions/Todos";
 import * as moment from "moment";
 import TodoContainer from "./TodoContainer";
 import AddTodoContainer from "./AddTodoContainer";
 import { Modes } from "../constants";
 import "../css/TodoListContainer.scss";
+import { getTodosForDate } from "../selectors";
 
-const TodoListContainer = ({
-  date,
-  todos,
-  addTodoId,
-  enableTodoEditMode,
-  disableTodoEditMode
-}) => {
+// Currently only used for date based lists
+// refactor to be date or project based
+const TodoListContainer = ({ date, todos, todoFormId }) => {
   const title = date
     ? moment(date).calendar(null, {
         sameDay: "[Today]",
@@ -32,6 +28,9 @@ const TodoListContainer = ({
         ? moment(date).format("MMM D")
         : "";
 
+  const dueDate = moment(date).format("YYYY-MM-DD");
+
+  // if the todo list title is overdue and there are no todos, don't render a list
   if (title === "Overdue" && todos.length === 0) return <div />;
 
   return (
@@ -42,28 +41,18 @@ const TodoListContainer = ({
         </div>
         <div className="todo-list-date">{titleDate}</div>
       </header>
+
       <div className="todo-list-content">
         {todos.map(todo => (
-          <TodoContainer
-            key={todo.title}
-            todo={todo}
-            enableEditMode={() =>
-              enableTodoEditMode({ type: "TODO", id: todo.id })
-            }
-            disableEditMode={() =>
-              disableTodoEditMode({ type: "TODO", id: todo.id })
-            }
-          />
+          <TodoContainer key={todo.title} todo={todo} />
         ))}
       </div>
+
+      {/* If the title of this todo list isn't Overdue render the Add Todo Container */}
       {(title !== "Overdue" && (
         <AddTodoContainer
-          dueDate={moment(date).format("YYYY-MM-DD")}
-          enableEditMode={() =>
-            enableTodoEditMode({ type: "ADD_TODO", id: date })
-          }
-          disableEditMode={() => disableTodoEditMode({ type: "ADD_TODO" })}
-          mode={addTodoId === date ? Modes.EDIT : Modes.READ}
+          dueDate={dueDate}
+          mode={todoFormId === dueDate ? Modes.EDIT : Modes.READ}
         />
       )) || <div className="todo-list-add-todo-placeholder" />}
     </div>
@@ -71,30 +60,10 @@ const TodoListContainer = ({
 };
 
 const mapState = (state, ownProps) => {
-  const todos = ownProps.overdue
-    ? state.todos
-        .filter(t => !t.completed)
-        .filter(t => moment(t.dueDate, "YYYY-MM-DD").isBefore(moment(), "day"))
-    : state.todos
-        .filter(t => !t.completed)
-        .filter(t =>
-          moment(t.dueDate, "YYYY-MM-DD").isSame(ownProps.date, "day")
-        );
-
   return {
-    todos,
-    addTodoId: state.addTodoId
+    todos: getTodosForDate(state, ownProps.dueDate, ownProps.overdue),
+    todoFormId: state.todoFormId
   };
 };
 
-const mapActions = dispatch => {
-  return {
-    enableTodoEditMode: id => dispatch(enableTodoEditMode(id)),
-    disableTodoEditMode: id => dispatch(disableTodoEditMode(id))
-  };
-};
-
-export default connect(
-  mapState,
-  mapActions
-)(TodoListContainer);
+export default connect(mapState)(TodoListContainer);

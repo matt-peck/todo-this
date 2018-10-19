@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { Modes } from "../constants";
-import { completeTodo, updateTodo, deleteTodo } from "../actions/Todos";
+import { Modes, Types } from "../constants";
+import {
+  completeTodo,
+  updateTodo,
+  deleteTodo,
+  enableTodoEditMode,
+  disableTodoEditMode
+} from "../actions/todos";
 import TodoForm from "./TodoForm";
 import "../css/TodoContainer.scss";
 
@@ -29,7 +35,9 @@ class TodoContainer extends Component {
             dueDate={todo.dueDate}
             project={todo.project}
             updateTodo={this.updateTodo}
-            disableEditMode={disableEditMode}
+            disableEditMode={() =>
+              disableEditMode({ type: Types.FORM.TODO, id: todo.id })
+            }
           />
         );
       default:
@@ -42,7 +50,12 @@ class TodoContainer extends Component {
               />
             </div>
 
-            <div onClick={enableEditMode} className="todo-title">
+            <div
+              onClick={() =>
+                enableEditMode({ type: Types.FORM.TODO, id: todo.id })
+              }
+              className="todo-title"
+            >
               {todo.title}
             </div>
             <Link
@@ -70,7 +83,11 @@ const mapActions = dispatch => {
     completeTodo: id => dispatch(completeTodo(id)),
     updateTodo: (id, title, dueDate, project) =>
       dispatch(updateTodo(id, title, dueDate, project)),
-    deleteTodo: id => dispatch(deleteTodo(id))
+    deleteTodo: id => dispatch(deleteTodo(id)),
+    enableEditMode: ({ type, id }) =>
+      dispatch(enableTodoEditMode({ type, id })),
+    disableEditMode: ({ type, id }) =>
+      dispatch(disableTodoEditMode({ type, id }))
   };
 };
 

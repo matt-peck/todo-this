@@ -41,13 +41,7 @@ class ProjectForm extends Component {
 }
 
 const mapFormState = state => {
-  //   const projects = state.projects.reduce((list, p) => {
-  //     return [...list, p.name, ...p.subProjects.map(s => s.name)];
-  //   }, []);
-
-  return {
-    // projects
-  };
+  return {};
 };
 
 const mapActions = dispatch => {

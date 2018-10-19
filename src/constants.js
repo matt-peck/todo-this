@@ -8,7 +8,12 @@ export const Types = {
   TODO_DISABLE_EDIT_ALL: "TODO_DISABLE_EDIT_ALL",
   ADD_TODO_ENABLE_EDIT: "ADD_TODO_ENABLE_EDIT",
   ADD_TODO_DISABLE_EDIT: "ADD_TODO_DISABLE_EDIT",
-  ADD_PROJECT: "ADD_PROJECT"
+  ADD_PROJECT: "ADD_PROJECT",
+  // FORM: used for controlling singular todo form open in edit mode
+  FORM: {
+    ADD_TODO: "ADD_TODO",
+    TODO: "TODO"
+  }
 };
 
 export const Modes = {

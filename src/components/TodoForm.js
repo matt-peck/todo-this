@@ -48,6 +48,8 @@ class TodoForm extends Component {
     const { view, disableEditMode, projects } = this.props;
     return (
       <div className="todo-form-container">
+        {/* Input Row */}
+
         <div className="todo-form-input">
           <div className="title">
             <input
@@ -63,10 +65,13 @@ class TodoForm extends Component {
                     <div
                       className="todo-form-project-item"
                       onClick={() =>
-                        this.setState({ project: p, isProjectListOpen: false })
+                        this.setState({
+                          project: p.name,
+                          isProjectListOpen: false
+                        })
                       }
                     >
-                      {p}
+                      {p.name}
                     </div>
                   );
                 })}
@@ -89,6 +94,9 @@ class TodoForm extends Component {
             isOutsideRange={() => false}
           />
         </div>
+
+        {/* Actions Row */}
+
         <div className="todo-form-actions">
           <div onClick={this.handleSubmit} className="todo-form-save">
             {(view && view === "UPDATE" && "Save") || "Add Task"}
@@ -106,19 +114,6 @@ class TodoForm extends Component {
             className="todo-form-projects-button"
             icon={faProjectDiagram}
           />
-
-          {/* <select
-            className="todo-form-projects-button"
-            value={this.state.project}
-            onChange={e => this.setState({ project: e.target.value })}
-          >
-            <option value="">---</option>
-            {this.props.projects.map(p => (
-              <option key={p} value={p}>
-                {p}
-              </option>
-            ))}
-          </select> */}
         </div>
       </div>
     );
@@ -126,12 +121,8 @@ class TodoForm extends Component {
 }
 
 const mapFormState = state => {
-  const projects = state.projects.reduce((list, p) => {
-    return [...list, p.name, ...p.subProjects.map(s => s.name)];
-  }, []);
-
   return {
-    projects
+    projects: state.projects
   };
 };
 

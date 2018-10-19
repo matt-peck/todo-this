@@ -1,81 +1,15 @@
 import { Types, Modes } from "../constants";
 
-const _todos = [
-  {
-    id: 0,
-    title: "Pay Bills - 1",
-    completed: false,
-    dueDate: "2018-10-15",
-    project: "Finances",
-    mode: Modes.READ
-  },
-  {
-    id: 1,
-    title: "Pay Bills - 2",
-    completed: false,
-    dueDate: "2018-10-16",
-    project: "Finances",
-    mode: Modes.READ
-  },
-  {
-    id: 2,
-    title: "Pay Bills - 3",
-    completed: false,
-    dueDate: "2018-10-14",
-    project: "Finances",
-    mode: Modes.READ
-  },
-  {
-    id: 3,
-    title: "Attend HOA Meeting - 1",
-    completed: false,
-    dueDate: "2018-10-18",
-    project: "Admin",
-    mode: Modes.READ
-  },
-  {
-    id: 4,
-    title: "Attend HOA Meeting - 2",
-    completed: false,
-    dueDate: "2018-10-14",
-    project: "Admin",
-    mode: Modes.READ
-  },
-  {
-    id: 5,
-    title: "Attend HOA Meeting - 3",
-    completed: false,
-    dueDate: "2018-10-15",
-    project: "Admin",
-    mode: Modes.READ
-  },
-  {
-    id: 6,
-    title: "Dental Exam",
-    completed: false,
-    dueDate: "2018-10-15",
-    project: "Guard",
-    mode: Modes.READ
-  },
-  {
-    id: 7,
-    title: "Submit Timesheet",
-    completed: false,
-    dueDate: "2018-10-14",
-    project: "Google",
-    mode: Modes.READ
-  },
-  {
-    id: 8,
-    title: "Attend Training",
-    completed: false,
-    dueDate: "2018-10-17",
-    project: null,
-    mode: Modes.READ
-  }
-];
+const todoDefault = {
+  id: null,
+  title: "",
+  completed: false,
+  dueDate: "",
+  project: "", // eventually this will be a projectId
+  mode: Modes.READ
+};
 
-const todos = (state = _todos, action) => {
+const todos = (state = [], action) => {
   switch (action.type) {
     case Types.TODO_COMPLETE:
       return state.map(t => {
@@ -89,7 +23,8 @@ const todos = (state = _todos, action) => {
       return [
         ...state,
         {
-          id: state.length,
+          ...todoDefault, // provide default state
+          id: state.length, // once we move todos to back end, will generate unique id's
           title: action.title,
           dueDate: action.dueDate,
           project: action.project || null
