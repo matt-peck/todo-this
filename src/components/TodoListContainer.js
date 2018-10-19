@@ -44,7 +44,7 @@ const TodoListContainer = ({ date, todos, todoFormId }) => {
 
       <div className="todo-list-content">
         {todos.map(todo => (
-          <TodoContainer key={todo.title} todo={todo} />
+          <TodoContainer key={todo.id} todo={todo} />
         ))}
       </div>
 

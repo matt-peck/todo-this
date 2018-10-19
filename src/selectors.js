@@ -7,9 +7,11 @@ export const getTodosForProject = (state, project) =>
 
 export const getTodosForDate = (state, date, overdue) =>
   overdue
-    ? state.todos
-        .filter(t => !t.completed)
-        .filter(t => moment(t.dueDate, "YYYY-MM-DD").isBefore(moment(), "day"))
-    : state.todos
-        .filter(t => !t.completed)
-        .filter(t => moment(t.dueDate, "YYYY-MM-DD").isSame(date, "day"));
+    ? state.todos.filter(
+        t =>
+          !t.completed &&
+          moment(t.dueDate, "YYYY-MM-DD").isBefore(moment(), "day")
+      )
+    : state.todos.filter(
+        t => !t.completed && moment(t.dueDate, "YYYY-MM-DD").isSame(date, "day")
+      );

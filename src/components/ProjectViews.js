@@ -14,7 +14,7 @@ class InboxViewShell extends Component {
       <div>
         <header className="view-header">Inbox</header>
         {todos.map(todo => (
-          <TodoContainer key={todo.title} todo={todo} />
+          <TodoContainer key={todo.id} todo={todo} />
         ))}
         <AddTodoContainer
           mode={todoFormId === "Inbox" ? Modes.EDIT : Modes.READ}
@@ -54,7 +54,7 @@ const ProjectViewShell = ({ projectName, todos, projects, todoFormId }) => {
               <div key={p.name} className="todo-list-container">
                 <header className="todo-list-header project">{p.name}</header>
                 {todos.filter(t => t.project === p.name).map(todo => (
-                  <TodoContainer key={todo.title} todo={todo} />
+                  <TodoContainer key={todo.id} todo={todo} />
                 ))}
 
                 <AddTodoContainer

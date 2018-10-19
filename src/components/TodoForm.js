@@ -63,6 +63,7 @@ class TodoForm extends Component {
                 {projects.map(p => {
                   return (
                     <div
+                      key={p.name}
                       className="todo-form-project-item"
                       onClick={() =>
                         this.setState({
