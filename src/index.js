@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import mainReducer from "./reducers/index.js";
 import logger from "redux-logger";
 import thunk from "redux-thunk";
-import { HashRouter as BrowserRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import App from "./components/App";
 
 const middleware = applyMiddleware(logger, thunk);
