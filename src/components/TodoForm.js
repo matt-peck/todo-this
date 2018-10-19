@@ -56,6 +56,11 @@ class TodoForm extends Component {
               type="text"
               autoFocus
               value={this.state.title}
+              onKeyPress={e => {
+                if (e.key === "Enter") {
+                  this.handleSubmit();
+                }
+              }}
               onChange={e => this.setState({ title: e.target.value })}
             />
             {this.state.isProjectListOpen && (

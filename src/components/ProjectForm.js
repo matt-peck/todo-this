@@ -9,8 +9,10 @@ class ProjectForm extends Component {
   };
 
   addProject = () => {
-    this.props.addProject(this.state.name);
-    this.props.cancel();
+    if (this.state.name.trim() !== "") {
+      this.props.addProject(this.state.name.trim());
+      this.props.cancel();
+    }
   };
 
   render() {
@@ -23,6 +25,11 @@ class ProjectForm extends Component {
               autoFocus
               placeholder="Name your project"
               value={this.state.name}
+              onKeyPress={e => {
+                if (e.key === "Enter") {
+                  this.addProject();
+                }
+              }}
               onChange={e => this.setState({ name: e.target.value })}
             />
           </div>
