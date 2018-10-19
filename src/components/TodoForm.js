@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { SingleDatePicker } from "react-dates";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faProjectDiagram } from "@fortawesome/free-solid-svg-icons";
 import * as moment from "moment";
 import "../css/TodoForm.scss";
 
@@ -11,7 +13,8 @@ class TodoForm extends Component {
     title: this.props.title || "",
     dueDate: moment(this.props.dueDate) || null,
     project: this.props.project || "",
-    focused: false
+    focused: false,
+    isProjectListOpen: false
   };
 
   addTodo = () => {
@@ -42,16 +45,34 @@ class TodoForm extends Component {
   clearTitle = () => this.setState({ title: "" });
 
   render() {
-    const { view, disableEditMode } = this.props;
+    const { view, disableEditMode, projects } = this.props;
     return (
       <div className="todo-form-container">
         <div className="todo-form-input">
-          <input
-            type="text"
-            autoFocus
-            value={this.state.title}
-            onChange={e => this.setState({ title: e.target.value })}
-          />
+          <div className="title">
+            <input
+              type="text"
+              autoFocus
+              value={this.state.title}
+              onChange={e => this.setState({ title: e.target.value })}
+            />
+            {this.state.isProjectListOpen && (
+              <div className="todo-form-project-list">
+                {projects.map(p => {
+                  return (
+                    <div
+                      className="todo-form-project-item"
+                      onClick={() =>
+                        this.setState({ project: p, isProjectListOpen: false })
+                      }
+                    >
+                      {p}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
           <SingleDatePicker
             date={this.state.dueDate}
             onDateChange={dueDate => this.setState({ dueDate })}
@@ -75,7 +96,18 @@ class TodoForm extends Component {
           <div onClick={disableEditMode} className="todo-form-cancel">
             Cancel
           </div>
-          <select
+
+          <FontAwesomeIcon
+            onClick={() =>
+              this.setState(prev => ({
+                isProjectListOpen: !prev.isProjectListOpen
+              }))
+            }
+            className="todo-form-projects-button"
+            icon={faProjectDiagram}
+          />
+
+          {/* <select
             className="todo-form-projects-button"
             value={this.state.project}
             onChange={e => this.setState({ project: e.target.value })}
@@ -86,7 +118,7 @@ class TodoForm extends Component {
                 {p}
               </option>
             ))}
-          </select>
+          </select> */}
         </div>
       </div>
     );
