@@ -1,7 +1,6 @@
 import React, { Fragment, Component } from "react";
 import { connect } from "react-redux";
 import { Modes } from "../constants";
-import { enableTodoEditMode, disableTodoEditMode } from "../actions/todos";
 import TodoContainer from "./TodoContainer";
 import AddTodoContainer from "./AddTodoContainer";
 import { getTodosForProject, getInboxTodos } from "../selectors";
@@ -31,17 +30,7 @@ const mapInboxState = state => {
   };
 };
 
-const mapActionsInbox = dispatch => {
-  return {
-    enableTodoEditMode: id => dispatch(enableTodoEditMode(id)),
-    disableTodoEditMode: id => dispatch(disableTodoEditMode(id))
-  };
-};
-
-export const InboxView = connect(
-  mapInboxState,
-  mapActionsInbox
-)(InboxViewShell);
+export const InboxView = connect(mapInboxState)(InboxViewShell);
 
 const ProjectViewShell = ({ projectName, todos, projects, todoFormId }) => {
   switch (projectName) {

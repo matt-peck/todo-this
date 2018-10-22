@@ -61,7 +61,7 @@ const TodoListContainer = ({ date, todos, todoFormId }) => {
 
 const mapState = (state, ownProps) => {
   return {
-    todos: getTodosForDate(state, ownProps.dueDate, ownProps.overdue),
+    todos: getTodosForDate(state, ownProps.date, ownProps.overdue),
     todoFormId: state.todoFormId
   };
 };

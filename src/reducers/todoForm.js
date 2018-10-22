@@ -8,6 +8,9 @@ const todoFormId = (state = null, action) => {
     case Types.ADD_TODO_DISABLE_EDIT:
       return null;
 
+    case Types.TODO_DISABLE_EDIT_ALL:
+      return null;
+
     default:
       return state;
   }

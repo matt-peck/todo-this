@@ -1,19 +1,50 @@
 import React from "react";
-import { Route, withRouter, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { Route, withRouter, Switch, Redirect } from "react-router-dom";
 import { TodayView, WeekView } from "./DateViews";
 import { InboxView, ProjectView } from "./ProjectViews";
+import { Types } from "../constants";
 import "../css/ViewContainer.scss";
 
-const ViewContainer = () => {
+const ViewContainer = ({ disableAllForms }) => {
   return (
     <article className="view-container">
-      <Redirect to="/week" exact from="/" />
-      <Route path="/inbox" component={InboxView} />
-      <Route path="/today" component={TodayView} />
-      <Route path="/week" component={WeekView} />
-      <Route path="/projects/:projectName?" component={ProjectView} />
+      <Switch>
+        <Redirect to="/week" exact from="/" />
+        <Route
+          path="/inbox"
+          render={props => {
+            disableAllForms();
+            return <InboxView {...props} />;
+          }}
+        />
+        <Route
+          path="/today"
+          render={props => {
+            disableAllForms();
+            return <TodayView {...props} />;
+          }}
+        />
+        <Route
+          path="/week"
+          render={props => {
+            return <WeekView {...props} />;
+          }}
+        />
+        <Route path="/projects/:projectName?" render={ProjectView} />
+      </Switch>
     </article>
   );
 };
 
-export default withRouter(ViewContainer);
+const mapActions = dispatch => {
+  return {
+    disableAllForms: () => dispatch({ type: Types.TODO_DISABLE_EDIT_ALL })
+  };
+};
+export default withRouter(
+  connect(
+    null,
+    mapActions
+  )(ViewContainer)
+);

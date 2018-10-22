@@ -35,7 +35,7 @@ class Sidebar extends Component {
       <div className="sidebar">
         <Link
           className={`nav-link ${page === "/inbox" && "active"}`}
-          to="/inbox"
+          to={(page === "/inbox" && null) || "/inbox"}
         >
           <FontAwesomeIcon className="nav-link-icon" icon={faInbox} />
           Inbox
