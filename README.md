@@ -4,9 +4,9 @@ By: Matt Peck
 
 ## Purpose
 
-I wanted to take some time to recreate one of my favorite web apps from scratch and use it to show my skills and technology interestings publicly since most of my work private.
+I wanted to take some time to recreate one of my favorite web apps from scratch and use it to show my skills and technology interests publicly since most of my work is private.
 
-I'm a huge fan of [Todoist]('https://todoist.com/') - I use it daily - and I thought it would be fun to re-engineer the free version of the app just by using analyzing the functionality and attempting to mimick it.
+I'm a huge fan of [Todoist]('https://todoist.com/') - I use it daily - and I thought it would be fun to re-engineer the free version of the app just by analyzing the functionality and attempting to mimick it.
 
 ## Hours
 
