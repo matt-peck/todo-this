@@ -18,7 +18,7 @@ It's important for me to keep track of my time while working on side projects, b
 
 ### To Do
 
-What would a project for managings to do's be without it's own to do list?
+What would a project for managing to do's be without it's own to do list?
 
 - [ ] Back End: Firebase Auth & Cloud Functions
 - [ ] Live Notification Updates (thinking react-toastify)
