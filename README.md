@@ -8,9 +8,9 @@ I wanted to take some time to recreate one of my favorite web apps from scratch 
 
 I'm a huge fan of [Todoist]('https://todoist.com/') - I use it daily - and I thought it would be fun to re-engineer the free version of the app just by using analyzing the functionality and attempting to mimick it.
 
-### Todo
+### To Do
 
-What would a project for managings todos be without it's own todo list?
+What would a project for managings to do's be without it's own to do list?
 
 - [ ] Back End: Firebase Auth & Cloud Functions
 - [ ] Live Notification Updates (thinking react-toastify)
