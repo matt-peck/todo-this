@@ -82,7 +82,7 @@
   .todo-form-actions {
     display: grid;
     grid-gap: 15px;
-    grid-template-columns: 55px 55px 1fr 150px;
+    grid-template-columns: 75px 55px 1fr 150px;
     grid-template-rows: 30px;
     grid-template-areas: "save cancel project";
     align-items: center;
