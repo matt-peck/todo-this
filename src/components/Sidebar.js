@@ -9,12 +9,12 @@ import {
   faCalendarAlt
 } from "@fortawesome/free-regular-svg-icons";
 import ProjectForm from "./ProjectForm";
+import { Types } from "../constants";
 import "../css/Sidebar.scss";
 
 class Sidebar extends Component {
   state = {
-    isOpen: false,
-    isProjectFormOpen: false
+    isOpen: false
   };
 
   toggleProjects = () => {
@@ -26,14 +26,23 @@ class Sidebar extends Component {
   };
 
   render() {
-    const { projects, todos, location } = this.props;
-    const { isOpen, isProjectFormOpen } = this.state;
+    const {
+      projects,
+      todos,
+      location,
+      isProjectFormOpen,
+      disableAllForms,
+      openProjectForm,
+      closeProjectForm
+    } = this.props;
+    const { isOpen } = this.state;
 
     const page = location.pathname;
     const today = moment().format("DD");
     return (
       <div className="sidebar">
         <Link
+          onClick={disableAllForms}
           className={`nav-link ${page === "/inbox" && "active"}`}
           to={(page === "/inbox" && null) || "/inbox"}
         >
@@ -44,6 +53,7 @@ class Sidebar extends Component {
           </span>
         </Link>
         <Link
+          onClick={disableAllForms}
           className={`nav-link ${page === "/today" && "active"}`}
           to="/today"
         >
@@ -54,7 +64,11 @@ class Sidebar extends Component {
             {todos.filter(t => moment().isSame(t.dueDate, "day")).length || ""}
           </span>
         </Link>
-        <Link className={`nav-link ${page === "/week" && "active"}`} to="/week">
+        <Link
+          onClick={disableAllForms}
+          className={`nav-link ${page === "/week" && "active"}`}
+          to="/week"
+        >
           <FontAwesomeIcon className="nav-link-icon" icon={faCalendarAlt} />
           Next 7 Days
           <span className="counter">
@@ -84,6 +98,7 @@ class Sidebar extends Component {
             return (
               <Link
                 key={p.name}
+                onClick={disableAllForms}
                 className={`nav-link  projects-list-item ${page ===
                   `/projects/${p.name}` && "active"}`}
                 to={`/projects/${p.name}`}
@@ -97,13 +112,10 @@ class Sidebar extends Component {
             );
           })}
           {(isProjectFormOpen && (
-            <ProjectForm
-              isOpen={isProjectFormOpen}
-              cancel={() => this.setState({ isProjectFormOpen: false })}
-            />
+            <ProjectForm isOpen={isProjectFormOpen} cancel={closeProjectForm} />
           )) || (
             <div
-              onClick={() => this.setState({ isProjectFormOpen: true })}
+              onClick={openProjectForm}
               className="add-todo-button-container"
             >
               <div className="add-todo-button-plus">+</div>
@@ -118,8 +130,25 @@ class Sidebar extends Component {
 const mapState = state => {
   return {
     projects: state.projects,
-    todos: state.todos
+    todos: state.todos,
+    isProjectFormOpen: state.isProjectFormOpen
   };
 };
 
-export default withRouter(connect(mapState)(Sidebar));
+const mapActions = dispatch => {
+  return {
+    disableAllForms: () => dispatch({ type: Types.TODO_DISABLE_EDIT_ALL }),
+    openProjectForm: () => {
+      dispatch({ type: Types.TODO_DISABLE_EDIT_ALL });
+      dispatch({ type: Types.OPEN_PROJECT_FORM });
+    },
+    closeProjectForm: () => dispatch({ type: Types.CLOSE_PROJECT_FORM })
+  };
+};
+
+export default withRouter(
+  connect(
+    mapState,
+    mapActions
+  )(Sidebar)
+);

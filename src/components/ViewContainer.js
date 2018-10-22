@@ -7,6 +7,7 @@ import { Types } from "../constants";
 import "../css/ViewContainer.scss";
 
 const ViewContainer = ({ disableAllForms }) => {
+  // disableAllForms();
   return (
     <article className="view-container">
       <Switch>
@@ -14,14 +15,12 @@ const ViewContainer = ({ disableAllForms }) => {
         <Route
           path="/inbox"
           render={props => {
-            disableAllForms();
             return <InboxView {...props} />;
           }}
         />
         <Route
           path="/today"
           render={props => {
-            disableAllForms();
             return <TodayView {...props} />;
           }}
         />
@@ -31,7 +30,7 @@ const ViewContainer = ({ disableAllForms }) => {
             return <WeekView {...props} />;
           }}
         />
-        <Route path="/projects/:projectName?" render={ProjectView} />
+        <Route path="/projects/:projectName?" component={ProjectView} />
       </Switch>
     </article>
   );

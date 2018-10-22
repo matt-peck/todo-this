@@ -9,6 +9,8 @@ export const Types = {
   ADD_TODO_ENABLE_EDIT: "ADD_TODO_ENABLE_EDIT",
   ADD_TODO_DISABLE_EDIT: "ADD_TODO_DISABLE_EDIT",
   ADD_PROJECT: "ADD_PROJECT",
+  OPEN_PROJECT_FORM: "OPEN_PROJECT_FORM",
+  CLOSE_PROJECT_FORM: "CLOSE_PROJECT_FORM",
   // FORM: used for controlling singular todo form open in edit mode
   FORM: {
     ADD_TODO: "ADD_TODO",
